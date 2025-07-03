@@ -9,9 +9,6 @@ export interface PersonalInfo {
   summary: string;
   // New dynamic fields
   topSkills: string[];
-  collegeName: string;
-  graduationYear: string;
-  graduationMonth?: string;
 }
 
 export interface Experience {
@@ -27,12 +24,14 @@ export interface Experience {
 
 export interface Education {
   id: string;
-  degree: string;
   institution: string;
   location: string;
-  graduationDate: string;
+  degree: string;
+  specialization?: string;
+  startYear: string;
+  endYear: string;
   gpa?: string;
-  honors?: string;
+  gradeType?: 'cgpa' | 'percentage';
 }
 
 export interface Skill {

@@ -11,10 +11,7 @@ const initialResumeData: ResumeData = {
     linkedin: '',
     github: '',
     summary: '',
-    topSkills: ['Machine Learning Engineer', 'Data Science', 'Python Developer'],
-    collegeName: 'PES Modern College of Engineering',
-    graduationYear: '2025',
-    graduationMonth: 'June'
+    topSkills: ['Machine Learning Engineer', 'Data Science', 'Python Developer']
   },
   experience: [],
   education: [],
@@ -37,15 +34,22 @@ export const useResumeData = () => {
         if (!parsed.personalInfo.topSkills) {
           parsed.personalInfo.topSkills = ['Machine Learning Engineer', 'Data Science', 'Python Developer'];
         }
-        if (!parsed.personalInfo.collegeName) {
-          parsed.personalInfo.collegeName = 'PES Modern College of Engineering';
+        // Remove old college fields if they exist
+        delete parsed.personalInfo.collegeName;
+        delete parsed.personalInfo.graduationYear;
+        delete parsed.personalInfo.graduationMonth;
+        
+        // Update education structure for backward compatibility
+        if (parsed.education) {
+          parsed.education = parsed.education.map((edu: any) => ({
+            ...edu,
+            institution: edu.institution || edu.school || '',
+            startYear: edu.startYear || edu.graduationDate?.split('-')[0] || '',
+            endYear: edu.endYear || edu.graduationDate?.split('-')[0] || '',
+            gradeType: edu.gradeType || 'cgpa'
+          }));
         }
-        if (!parsed.personalInfo.graduationYear) {
-          parsed.personalInfo.graduationYear = '2025';
-        }
-        if (!parsed.personalInfo.graduationMonth) {
-          parsed.personalInfo.graduationMonth = 'June';
-        }
+        
         if (!parsed.certifications) {
           parsed.certifications = [];
         }

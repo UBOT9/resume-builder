@@ -194,68 +194,6 @@ export const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ data, onChan
         </p>
       </div>
 
-      {/* College Information Section */}
-      <div className="mt-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">College Information</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              College/University Name *
-            </label>
-            <input
-              type="text"
-              value={data.collegeName || ''}
-              onChange={(e) => handleChange('collegeName', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              placeholder="PES Modern College of Engineering"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Graduation Year *
-            </label>
-            <input
-              type="number"
-              min="2020"
-              max="2030"
-              value={data.graduationYear || ''}
-              onChange={(e) => handleChange('graduationYear', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              placeholder="2025"
-              required
-            />
-          </div>
-        </div>
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Graduation Month (Optional)
-          </label>
-          <select
-            value={data.graduationMonth || ''}
-            onChange={(e) => handleChange('graduationMonth', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-          >
-            <option value="">Select month (optional)</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-          </select>
-        </div>
-        <p className="text-sm text-gray-500 mt-2">
-          This will appear as "{data.graduationMonth || 'Month'} {data.graduationYear || 'Year'} Pass out" in your header
-        </p>
-      </div>
-
       <div className="mt-6">
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Professional Summary *

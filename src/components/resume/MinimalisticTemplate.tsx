@@ -36,13 +36,6 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
     return skills.filter(skill => skill.trim()).join(' • ');
   };
 
-  const getCollegeLine = () => {
-    const collegeName = data.personalInfo.collegeName || 'PES Modern College of Engineering';
-    const graduationMonth = data.personalInfo.graduationMonth || 'June';
-    const graduationYear = data.personalInfo.graduationYear || '2025';
-    return `${collegeName} • ${graduationMonth} ${graduationYear} Pass out`;
-  };
-
   return (
     <div 
       className="mx-auto bg-white" 
@@ -94,7 +87,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
           {getTopSkillsLine()}
         </p>
         
-        {/* College and portfolio line */}
+        {/* Website line */}
         <div style={{
           fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
           fontSize: '11pt',
@@ -108,7 +101,6 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
           flexWrap: 'wrap',
           fontWeight: 'normal'
         }}>
-          <span>{getCollegeLine()}</span>
           <Globe style={{ width: '11px', height: '11px', flexShrink: 0 }} />
           <span style={{ textDecoration: 'underline' }}>
             {data.personalInfo.website ? 
@@ -188,7 +180,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                       color: '#000000',
                       marginBottom: '1pt'
                     }}>
-                      {edu.institution}, {edu.location}
+                      {edu.institution}{edu.location && `, ${edu.location}`}
                     </div>
                     <div style={{
                       fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
@@ -196,7 +188,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                       fontStyle: 'italic',
                       color: '#000000'
                     }}>
-                      {edu.degree}
+                      {edu.degree}{edu.specialization && `, ${edu.specialization}`}
                     </div>
                     {edu.gpa && (
                       <div style={{
@@ -205,7 +197,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                         color: '#000000',
                         marginTop: '1pt'
                       }}>
-                        CGPA: {edu.gpa}
+                        {edu.gradeType === 'percentage' ? 'Percentage' : 'CGPA'}: {edu.gpa}
                       </div>
                     )}
                   </div>
@@ -216,7 +208,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                     color: '#000000',
                     textAlign: 'right'
                   }}>
-                    {formatDateRange(edu.graduationDate, '', false)}
+                    {edu.startYear} – {edu.endYear}
                   </div>
                 </div>
               </div>

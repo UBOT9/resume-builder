@@ -17,32 +17,38 @@ export const EducationForm: React.FC<EducationFormProps> = ({
 }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newEducation, setNewEducation] = useState<Partial<Education>>({
-    degree: '',
     institution: '',
     location: '',
-    graduationDate: '',
+    degree: '',
+    specialization: '',
+    startYear: '',
+    endYear: '',
     gpa: '',
-    honors: ''
+    gradeType: 'cgpa'
   });
 
   const handleAdd = () => {
-    if (newEducation.degree && newEducation.institution && newEducation.graduationDate) {
+    if (newEducation.institution && newEducation.degree && newEducation.startYear && newEducation.endYear) {
       onAdd({
         id: Date.now().toString(),
-        degree: newEducation.degree!,
         institution: newEducation.institution!,
         location: newEducation.location || '',
-        graduationDate: newEducation.graduationDate!,
+        degree: newEducation.degree!,
+        specialization: newEducation.specialization,
+        startYear: newEducation.startYear!,
+        endYear: newEducation.endYear!,
         gpa: newEducation.gpa,
-        honors: newEducation.honors
+        gradeType: newEducation.gradeType || 'cgpa'
       });
       setNewEducation({
-        degree: '',
         institution: '',
         location: '',
-        graduationDate: '',
+        degree: '',
+        specialization: '',
+        startYear: '',
+        endYear: '',
         gpa: '',
-        honors: ''
+        gradeType: 'cgpa'
       });
       setShowAddForm(false);
     }
@@ -77,23 +83,13 @@ export const EducationForm: React.FC<EducationFormProps> = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Degree</label>
-                <input
-                  type="text"
-                  value={education.degree}
-                  onChange={(e) => onUpdate(education.id, { degree: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Bachelor of Science in Computer Science"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Institution</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Institution/University Name</label>
                 <input
                   type="text"
                   value={education.institution}
                   onChange={(e) => onUpdate(education.id, { institution: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="University of Technology"
+                  placeholder="PES Modern College of Engineering"
                 />
               </div>
               <div>
@@ -103,36 +99,74 @@ export const EducationForm: React.FC<EducationFormProps> = ({
                   value={education.location}
                   onChange={(e) => onUpdate(education.id, { location: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Boston, MA"
+                  placeholder="Pune"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Graduation Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Degree (Short Form)</label>
                 <input
-                  type="month"
-                  value={education.graduationDate}
-                  onChange={(e) => onUpdate(education.id, { graduationDate: e.target.value })}
+                  type="text"
+                  value={education.degree}
+                  onChange={(e) => onUpdate(education.id, { degree: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="B.E. or Class XII"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">GPA (Optional)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Specialization/Honors (Optional)</label>
+                <input
+                  type="text"
+                  value={education.specialization || ''}
+                  onChange={(e) => onUpdate(education.id, { specialization: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Artificial Intelligence and Machine Learning"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Start Year</label>
+                <input
+                  type="number"
+                  min="2000"
+                  max="2030"
+                  value={education.startYear}
+                  onChange={(e) => onUpdate(education.id, { startYear: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="2021"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">End Year</label>
+                <input
+                  type="number"
+                  min="2000"
+                  max="2030"
+                  value={education.endYear}
+                  onChange={(e) => onUpdate(education.id, { endYear: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="2025"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Grade Type</label>
+                <select
+                  value={education.gradeType || 'cgpa'}
+                  onChange={(e) => onUpdate(education.id, { gradeType: e.target.value as 'cgpa' | 'percentage' })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="cgpa">CGPA</option>
+                  <option value="percentage">Percentage</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {education.gradeType === 'percentage' ? 'Percentage' : 'CGPA'} (Optional)
+                </label>
                 <input
                   type="text"
                   value={education.gpa || ''}
                   onChange={(e) => onUpdate(education.id, { gpa: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="3.8/4.0"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Honors (Optional)</label>
-                <input
-                  type="text"
-                  value={education.honors || ''}
-                  onChange={(e) => onUpdate(education.id, { honors: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Magna Cum Laude"
+                  placeholder={education.gradeType === 'percentage' ? '85.5%' : '8.17'}
                 />
               </div>
             </div>
@@ -147,23 +181,13 @@ export const EducationForm: React.FC<EducationFormProps> = ({
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Degree *</label>
-              <input
-                type="text"
-                value={newEducation.degree || ''}
-                onChange={(e) => setNewEducation(prev => ({ ...prev, degree: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Bachelor of Science in Computer Science"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Institution *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Institution/University Name *</label>
               <input
                 type="text"
                 value={newEducation.institution || ''}
                 onChange={(e) => setNewEducation(prev => ({ ...prev, institution: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="University of Technology"
+                placeholder="PES Modern College of Engineering"
               />
             </div>
             <div>
@@ -173,36 +197,74 @@ export const EducationForm: React.FC<EducationFormProps> = ({
                 value={newEducation.location || ''}
                 onChange={(e) => setNewEducation(prev => ({ ...prev, location: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Boston, MA"
+                placeholder="Pune"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Graduation Date *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Degree (Short Form) *</label>
               <input
-                type="month"
-                value={newEducation.graduationDate || ''}
-                onChange={(e) => setNewEducation(prev => ({ ...prev, graduationDate: e.target.value }))}
+                type="text"
+                value={newEducation.degree || ''}
+                onChange={(e) => setNewEducation(prev => ({ ...prev, degree: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="B.E. or Class XII"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">GPA (Optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Specialization/Honors (Optional)</label>
+              <input
+                type="text"
+                value={newEducation.specialization || ''}
+                onChange={(e) => setNewEducation(prev => ({ ...prev, specialization: e.target.value }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Artificial Intelligence and Machine Learning"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Start Year *</label>
+              <input
+                type="number"
+                min="2000"
+                max="2030"
+                value={newEducation.startYear || ''}
+                onChange={(e) => setNewEducation(prev => ({ ...prev, startYear: e.target.value }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="2021"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">End Year *</label>
+              <input
+                type="number"
+                min="2000"
+                max="2030"
+                value={newEducation.endYear || ''}
+                onChange={(e) => setNewEducation(prev => ({ ...prev, endYear: e.target.value }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="2025"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Grade Type</label>
+              <select
+                value={newEducation.gradeType || 'cgpa'}
+                onChange={(e) => setNewEducation(prev => ({ ...prev, gradeType: e.target.value as 'cgpa' | 'percentage' }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="cgpa">CGPA</option>
+                <option value="percentage">Percentage</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {newEducation.gradeType === 'percentage' ? 'Percentage' : 'CGPA'} (Optional)
+              </label>
               <input
                 type="text"
                 value={newEducation.gpa || ''}
                 onChange={(e) => setNewEducation(prev => ({ ...prev, gpa: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="3.8/4.0"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Honors (Optional)</label>
-              <input
-                type="text"
-                value={newEducation.honors || ''}
-                onChange={(e) => setNewEducation(prev => ({ ...prev, honors: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Magna Cum Laude"
+                placeholder={newEducation.gradeType === 'percentage' ? '85.5%' : '8.17'}
               />
             </div>
           </div>
