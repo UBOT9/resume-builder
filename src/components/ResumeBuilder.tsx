@@ -44,7 +44,8 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBackToHome }) =>
   const handleExportPDF = async () => {
     setIsExporting(true);
     try {
-      await exportToPDF('resume-preview', `${resumeData.personalInfo.fullName || 'Resume'}.pdf`);
+      // Pass resume data to create text-based PDF
+      await exportToPDF('resume-preview', `${resumeData.personalInfo.fullName || 'Resume'}.pdf`, resumeData);
     } catch (error) {
       alert('Failed to export PDF. Please try again.');
     } finally {
@@ -135,7 +136,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBackToHome }) =>
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-700">Generating your PDF...</p>
+            <p className="text-gray-700">Generating your text-based PDF...</p>
           </div>
         </div>
       )}
