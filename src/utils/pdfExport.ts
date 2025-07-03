@@ -78,7 +78,7 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
       return await exportToImagePDF(elementId, filename);
     }
 
-    // Header Section - EXACTLY like the reference image with proper alignment
+    // Header Section - Clean and simple
     
     // 1. Name (Large, bold, uppercase, centered)
     yPosition = addText(resumeData.personalInfo.fullName.toUpperCase(), 0, yPosition, {
@@ -99,87 +99,18 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
       yPosition += 2;
     }
 
-    // 3. College and graduation info with website (centered) - FIXED ALIGNMENT
-    const collegeInfo = [];
-    
-    // Use college info from personal info (new fields)
-    if (resumeData.personalInfo.collegeName) {
-      collegeInfo.push(resumeData.personalInfo.collegeName);
-    }
-    
-    if (resumeData.personalInfo.graduationMonth && resumeData.personalInfo.graduationYear) {
-      collegeInfo.push(`${resumeData.personalInfo.graduationMonth} ${resumeData.personalInfo.graduationYear} Pass out`);
-    }
-    
+    // 3. Website line (centered, if available)
     if (resumeData.personalInfo.website) {
       const websiteDisplay = resumeData.personalInfo.website.replace('https://', '').replace('http://', '');
-      collegeInfo.push(websiteDisplay);
-    }
-
-    if (collegeInfo.length > 0) {
-      const collegeText = collegeInfo.join(' • ');
-      
-      // FIXED: Proper text width calculation and smart line breaking
-      pdf.setFontSize(12);
-      pdf.setFont('times', 'normal');
-      
-      // Check if the text fits on one line
-      const textWidth = pdf.getTextWidth(collegeText);
-      const maxLineWidth = contentWidth - 10; // Leave some margin for safety
-      
-      if (textWidth > maxLineWidth) {
-        // Smart line breaking - try to break at logical points
-        if (collegeInfo.length >= 3) {
-          // Split into two lines: college + graduation on first line, website on second
-          const firstLine = collegeInfo.slice(0, 2).join(' • ');
-          const secondLine = collegeInfo.slice(2).join(' • ');
-          
-          // Check if first line still fits
-          const firstLineWidth = pdf.getTextWidth(firstLine);
-          if (firstLineWidth <= maxLineWidth) {
-            yPosition = addText(firstLine, 0, yPosition, {
-              fontSize: 12,
-              align: 'center'
-            });
-            yPosition = addText(secondLine, 0, yPosition, {
-              fontSize: 12,
-              align: 'center',
-              link: resumeData.personalInfo.website
-            });
-          } else {
-            // If even first line is too long, use automatic text wrapping
-            const lines = pdf.splitTextToSize(collegeText, maxLineWidth);
-            lines.forEach((line: string, index: number) => {
-              yPosition = addText(line.trim(), 0, yPosition, {
-                fontSize: 12,
-                align: 'center',
-                link: index === lines.length - 1 && resumeData.personalInfo.website ? resumeData.personalInfo.website : null
-              });
-            });
-          }
-        } else {
-          // Use automatic text wrapping for shorter content
-          const lines = pdf.splitTextToSize(collegeText, maxLineWidth);
-          lines.forEach((line: string) => {
-            yPosition = addText(line.trim(), 0, yPosition, {
-              fontSize: 12,
-              align: 'center',
-              link: resumeData.personalInfo.website
-            });
-          });
-        }
-      } else {
-        // Text fits on one line
-        yPosition = addText(collegeText, 0, yPosition, {
-          fontSize: 12,
-          align: 'center',
-          link: resumeData.personalInfo.website
-        });
-      }
+      yPosition = addText(`🌐 ${websiteDisplay}`, 0, yPosition, {
+        fontSize: 12,
+        align: 'center',
+        link: resumeData.personalInfo.website
+      });
       yPosition += 2;
     }
 
-    // 4. Contact information line (centered, properly spaced) - EXACTLY like reference image
+    // 4. Contact information line (centered, properly spaced)
     const contactItems = [];
     
     if (resumeData.personalInfo.phone) {
