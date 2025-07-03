@@ -30,12 +30,12 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ data, template }) 
         <p className="text-gray-600 text-sm">This is how your resume will look when exported</p>
       </div>
       <div 
-        className="border border-gray-300 rounded-lg overflow-hidden bg-white"
+        className="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg"
         style={{
-          transform: 'scale(0.8)',
+          transform: 'scale(0.75)',
           transformOrigin: 'top center',
-          width: '125%',
-          marginLeft: '-12.5%'
+          width: '133.33%',
+          marginLeft: '-16.67%'
         }}
       >
         {renderTemplate()}
