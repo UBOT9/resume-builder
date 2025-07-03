@@ -99,7 +99,7 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
       yPosition += 2;
     }
 
-    // 3. College and graduation info with website (centered) - EXACTLY like reference image
+    // 3. College and graduation info with website (centered) - FIXED ALIGNMENT
     const collegeInfo = [];
     
     // Use college info from personal info (new fields)
@@ -119,22 +119,57 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
     if (collegeInfo.length > 0) {
       const collegeText = collegeInfo.join(' • ');
       
-      // Check if the text is too long for one line
+      // FIXED: Proper text width calculation and smart line breaking
       pdf.setFontSize(12);
+      pdf.setFont('times', 'normal');
+      
+      // Check if the text fits on one line
       const textWidth = pdf.getTextWidth(collegeText);
-      const maxLineWidth = contentWidth;
+      const maxLineWidth = contentWidth - 10; // Leave some margin for safety
       
       if (textWidth > maxLineWidth) {
-        // Split into multiple lines if too long
-        const lines = pdf.splitTextToSize(collegeText, maxLineWidth);
-        lines.forEach((line: string) => {
-          yPosition = addText(line, 0, yPosition, {
-            fontSize: 12,
-            align: 'center',
-            link: resumeData.personalInfo.website
+        // Smart line breaking - try to break at logical points
+        if (collegeInfo.length >= 3) {
+          // Split into two lines: college + graduation on first line, website on second
+          const firstLine = collegeInfo.slice(0, 2).join(' • ');
+          const secondLine = collegeInfo.slice(2).join(' • ');
+          
+          // Check if first line still fits
+          const firstLineWidth = pdf.getTextWidth(firstLine);
+          if (firstLineWidth <= maxLineWidth) {
+            yPosition = addText(firstLine, 0, yPosition, {
+              fontSize: 12,
+              align: 'center'
+            });
+            yPosition = addText(secondLine, 0, yPosition, {
+              fontSize: 12,
+              align: 'center',
+              link: resumeData.personalInfo.website
+            });
+          } else {
+            // If even first line is too long, use automatic text wrapping
+            const lines = pdf.splitTextToSize(collegeText, maxLineWidth);
+            lines.forEach((line: string, index: number) => {
+              yPosition = addText(line.trim(), 0, yPosition, {
+                fontSize: 12,
+                align: 'center',
+                link: index === lines.length - 1 && resumeData.personalInfo.website ? resumeData.personalInfo.website : null
+              });
+            });
+          }
+        } else {
+          // Use automatic text wrapping for shorter content
+          const lines = pdf.splitTextToSize(collegeText, maxLineWidth);
+          lines.forEach((line: string) => {
+            yPosition = addText(line.trim(), 0, yPosition, {
+              fontSize: 12,
+              align: 'center',
+              link: resumeData.personalInfo.website
+            });
           });
-        });
+        }
       } else {
+        // Text fits on one line
         yPosition = addText(collegeText, 0, yPosition, {
           fontSize: 12,
           align: 'center',
