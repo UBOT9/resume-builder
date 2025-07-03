@@ -58,8 +58,8 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         color: '#000000',
         padding: '40px',
         minHeight: '1123px',
-        width: '794px',
-        maxWidth: '794px',
+        width: '100%',
+        maxWidth: '850px',
         boxSizing: 'border-box'
       }}
     >
@@ -72,12 +72,12 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         {/* Name - Large serif font with LaTeX styling, all caps, bold */}
         <h1 style={{
           fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-          fontSize: '24pt',
+          fontSize: '28pt',
           fontWeight: 'bold',
           color: '#000000',
-          marginBottom: '6pt',
+          marginBottom: '8pt',
           textTransform: 'uppercase',
-          letterSpacing: '3px',
+          letterSpacing: '2px',
           lineHeight: '1.1',
           textAlign: 'center',
           fontVariant: 'small-caps'
@@ -88,9 +88,9 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         {/* Professional title line - serif font with bullet separators */}
         <p style={{
           fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-          fontSize: '11pt',
+          fontSize: '12pt',
           color: '#000000',
-          marginBottom: '4pt',
+          marginBottom: '6pt',
           lineHeight: '1.2',
           textAlign: 'center',
           fontWeight: 'normal'
@@ -101,9 +101,9 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         {/* College and website line - EXACTLY like reference image */}
         <div style={{
           fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-          fontSize: '11pt',
+          fontSize: '12pt',
           color: '#000000',
-          marginBottom: '4pt',
+          marginBottom: '6pt',
           lineHeight: '1.2',
           display: 'flex',
           alignItems: 'center',
@@ -112,7 +112,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
           flexWrap: 'wrap',
           fontWeight: 'normal'
         }}>
-          <Globe style={{ width: '11px', height: '11px', flexShrink: 0 }} />
+          <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
           <span style={{ textDecoration: 'underline' }}>
             {getCollegeLine()}
           </span>
@@ -126,26 +126,26 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '12px',
+          gap: '16px',
           flexWrap: 'wrap',
-          marginTop: '2pt',
+          marginTop: '4pt',
           fontWeight: 'normal'
         }}>
           {data.personalInfo.phone && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
-              <Phone style={{ width: '9px', height: '9px' }} />
+              <Phone style={{ width: '10px', height: '10px' }} />
               <span>{data.personalInfo.phone}</span>
             </div>
           )}
           {data.personalInfo.email && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
-              <Mail style={{ width: '9px', height: '9px' }} />
+              <Mail style={{ width: '10px', height: '10px' }} />
               <span style={{ textDecoration: 'underline' }}>{data.personalInfo.email}</span>
             </div>
           )}
           {data.personalInfo.linkedin && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
-              <Linkedin style={{ width: '9px', height: '9px' }} />
+              <Linkedin style={{ width: '10px', height: '10px' }} />
               <span style={{ textDecoration: 'underline' }}>
                 {data.personalInfo.linkedin.replace('https://linkedin.com/in/', '').replace('https://www.linkedin.com/in/', 'linkedin.com/in/')}
               </span>
@@ -153,7 +153,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
           )}
           {data.personalInfo.github && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
-              <Github style={{ width: '9px', height: '9px' }} />
+              <Github style={{ width: '10px', height: '10px' }} />
               <span style={{ textDecoration: 'underline' }}>
                 {data.personalInfo.github.replace('https://github.com/', 'github.com/')}
               </span>
@@ -161,6 +161,32 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
           )}
         </div>
       </div>
+
+      {/* Professional Summary Section - Optional */}
+      {data.personalInfo.summary && (
+        <section style={{ marginBottom: '16pt' }}>
+          <h2 style={{
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '12pt',
+            fontWeight: 'bold',
+            color: '#000000',
+            marginBottom: '6pt',
+            borderBottom: '0.8pt solid #000000',
+            paddingBottom: '2pt'
+          }}>
+            Professional Summary
+          </h2>
+          <p style={{
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '11pt',
+            color: '#000000',
+            lineHeight: '1.4',
+            textAlign: 'justify'
+          }}>
+            {data.personalInfo.summary}
+          </p>
+        </section>
+      )}
 
       {/* Education Section - Matching exact layout from reference with marks below year */}
       {data.education.length > 0 && (
@@ -259,7 +285,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
             // Use actual skills from data if available, otherwise use default categories
             const actualSkills = data.skills.filter(skill => skill.category === 'technical');
             const skillsToShow = actualSkills.length > 0 ? 
-              actualSkills.slice(index * 2, (index + 1) * 2).map(s => s.name) : 
+              actualSkills.slice(index * 3, (index + 1) * 3).map(s => s.name) : 
               category.skills;
             
             if (skillsToShow.length === 0 && actualSkills.length > 0) return null;
@@ -307,7 +333,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                       color: '#000000',
                       marginBottom: '1pt'
                     }}>
-                      {exp.company}, {exp.location}
+                      {exp.position}
                     </div>
                     <div style={{
                       fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
@@ -315,7 +341,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                       fontStyle: 'italic',
                       color: '#000000'
                     }}>
-                      {exp.position}
+                      {exp.company}, {exp.location}
                     </div>
                   </div>
                   <div style={{

@@ -78,7 +78,7 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
       return await exportToImagePDF(elementId, filename);
     }
 
-    // Header Section - Properly spaced and formatted exactly like the reference image
+    // Header Section - EXACTLY like the reference image with proper alignment
     
     // 1. Name (Large, bold, uppercase, centered)
     yPosition = addText(resumeData.personalInfo.fullName.toUpperCase(), 0, yPosition, {
@@ -162,6 +162,26 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
     }
 
     yPosition += 8; // Extra spacing before sections
+
+    // Professional Summary Section (Optional)
+    if (resumeData.personalInfo.summary) {
+      yPosition = addText('Professional Summary', margin, yPosition, {
+        fontSize: 14,
+        fontStyle: 'bold'
+      });
+      yPosition = addLine(yPosition);
+      yPosition += 2;
+
+      // Split summary into multiple lines if needed
+      pdf.setFontSize(11);
+      pdf.setFont('times', 'normal');
+      const summaryLines = pdf.splitTextToSize(resumeData.personalInfo.summary, contentWidth);
+      summaryLines.forEach((line: string) => {
+        pdf.text(line, margin, yPosition);
+        yPosition += 4;
+      });
+      yPosition += 3;
+    }
 
     // Education Section
     if (resumeData.education.length > 0) {
@@ -306,10 +326,10 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
       yPosition += 2;
 
       resumeData.experience.forEach((exp) => {
-        // Company and dates
+        // Position and dates
         pdf.setFontSize(12);
         pdf.setFont('times', 'bold');
-        pdf.text(`${exp.company}, ${exp.location}`, margin, yPosition);
+        pdf.text(exp.position, margin, yPosition);
         
         const startDate = new Date(exp.startDate + '-01');
         const startText = startDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -317,10 +337,10 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
         pdf.text(`${startText} - ${endText}`, pageWidth - margin, yPosition, { align: 'right' });
         yPosition += 5;
 
-        // Position with duration
+        // Company with duration
         pdf.setFontSize(11);
         pdf.setFont('times', 'italic');
-        pdf.text(exp.position, margin, yPosition);
+        pdf.text(`${exp.company}, ${exp.location}`, margin, yPosition);
         
         // Calculate duration (simplified)
         if (exp.current || exp.endDate) {
