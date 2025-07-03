@@ -1,0 +1,119 @@
+\documentclass[11pt,a4paper,sans]{moderncv}
+
+% Modern CV theme and style
+\moderncvstyle{classic}
+\moderncvcolor{black}
+
+% Character encoding
+\usepackage[utf8]{inputenc}
+
+% Adjust page margins
+\usepackage[scale=0.85]{geometry}
+
+% For custom spacing and formatting
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fontawesome}
+\usepackage{microtype}
+
+% Custom colors
+\definecolor{darkgray}{RGB}{64,64,64}
+\definecolor{mediumgray}{RGB}{128,128,128}
+
+% Custom section formatting
+\renewcommand*{\sectionfont}{\Large\bfseries\upshape}
+
+% Personal data
+\name{Alok}{Ahirrao}
+\title{Machine Learning Engineer • Data Science • Python Developer}
+\address{PES Modern College of Engineering • June 2025 Pass out}{}{}
+\phone[mobile]{+91-9579472584}
+\email{alokahirrao.ai@gmail.com}
+\social[linkedin]{linkedin.com/in/alokahirrao}
+\social[github]{github.com/alok-ahirrao}
+\homepage{alokahirrao.netlify.app}
+
+% Custom commands for better formatting
+\newcommand{\cvdoublecolumn}[2]{%
+  \cvitem[0.75em]{}{%
+    \begin{minipage}[t]{\listdoubleitemcolumnwidth}#1\end{minipage}%
+    \hfill%
+    \begin{minipage}[t]{\listdoubleitemcolumnwidth}#2\end{minipage}%
+    }%
+}
+
+\newcommand{\cvreference}[7]{%
+    \textbf{#1}\newline% Name
+    \ifthenelse{\equal{#2}{}}{}{\addresssymbol~#2\newline}%
+    \ifthenelse{\equal{#3}{}}{}{#3\newline}%
+    \ifthenelse{\equal{#4}{}}{}{#4\newline}%
+    \ifthenelse{\equal{#5}{}}{}{\emailsymbol~\texttt{#5}\newline}%
+    \ifthenelse{\equal{#6}{}}{}{\phonesymbol~#6\newline}%
+    \ifthenelse{\equal{#7}{}}{}{\mobilephonesymbol~#7}}
+
+\begin{document}
+
+% Custom header
+\makecvtitle
+
+\vspace{-1.5cm}
+
+\section{Education}
+\cventry{2021--2025}{B.E., Artificial Intelligence and Machine Learning}{PES Modern College of Engineering, Pune}{}{CGPA: 8.17}{}
+\cventry{2021--2021}{Class XII}{MET Bhujbal Knowledge City}{}{CGPA: 8.15}{}
+
+\section{Technical Skills}
+\cvitem{Programming Languages:}{Python, SQL}
+\cvitem{Machine Learning \& Data Science:}{Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn, OpenCV}
+\cvitem{Deep Learning:}{PyTorch, TensorFlow (basic), CNNs, RNNs, Transformers (basic)}
+\cvitem{Backend \& APIs:}{FastAPI, Flask, RESTful APIs, MongoDB, PostgreSQL, JWT Authentication}
+\cvitem{Tools \& Platforms:}{Git, Docker, Postman, Streamlit, Gradio}
+\cvitem{Deployment \& DevOps:}{Docker, GitHub Actions (basic CI/CD), AWS EC2/S3 (basic)}
+
+\section{Work Experience}
+\cventry{June 2024--Present}{Machine Learning Developer Intern}{Ilytics Technology, Pune}{}{9.5 months}{
+\begin{itemize}[leftmargin=0.6cm, label=\textbullet]
+\item Developed \textbf{AI-powered smart parking system} with real-time vehicle classification and slot detection
+\item Built \textbf{ML models} using TensorFlow/PyTorch for vehicle classification (VIP, Normal, EV)
+\item Enhanced \textbf{chatbot interactions} using prompt engineering for improved booking experience
+\item Implemented \textbf{admin dashboard} for monitoring and analytics
+\end{itemize}}
+
+\section{Projects}
+
+\cventry{2024}{AI Medical Bot}{Python, Deep Learning, OpenCV, NLP | Demo | GitHub}{}{}{
+\begin{itemize}[leftmargin=0.6cm, label=\textbullet]
+\item Designed an \textbf{AI-driven healthcare assistant} supporting voice queries, medical image analysis, and \textbf{text/audio responses} using deep learning and \textbf{NLP models}
+\item Integrated \textbf{Groq API, OpenCV}, and \textbf{text-to-speech} for seamless multimodal interaction
+\item Deployed via \textbf{Hugging Face Spaces} using \textbf{Gradio UI} for accessible, browser-based usage
+\end{itemize}}
+
+\cventry{2024}{Recipe Chatbot}{FastAPI, React, Groq API | GitHub}{}{}{
+\begin{itemize}[leftmargin=0.6cm, label=\textbullet]
+\item Developed an \textbf{AI-powered Recipe Chatbot} using \textbf{YOLO} for ingredient detection and \textbf{Groq API} for \textbf{recipe generation}
+\item Built \textbf{FastAPI backend} and \textbf{React frontend} for real-time chatbot assistance
+\item Implemented \textbf{secure API management} and modular architecture
+\end{itemize}}
+
+\cventry{2024}{Hand Gesture-Controlled Gaming System}{OpenCV, MediaPipe | GitHub}{}{}{
+\begin{itemize}[leftmargin=0.6cm, label=\textbullet]
+\item Developed \textbf{interactive gaming system} with \textbf{hand gesture recognition} using \textbf{OpenCV} and \textbf{MediaPipe}
+\item Implemented \textbf{real-time tracking} and \textbf{interactive GUI} with \textbf{multi-game support}
+\item Created \textbf{gesture mapping system} for key press simulation
+\end{itemize}}
+
+\cventry{2024}{Number Plate Detection System}{PyTorch, FastAPI, React | GitHub}{}{}{
+\begin{itemize}[leftmargin=0.6cm, label=\textbullet]
+\item Built \textbf{real-time number plate recognition system} using \textbf{YOLOv5} and \textbf{PaddleOCR}
+\item Developed \textbf{FastAPI backend} and \textbf{React frontend} with \textbf{MongoDB integration}
+\item Implemented \textbf{high-accuracy detection} supporting multiple plates
+\end{itemize}}
+
+\newpage
+
+\section{Certifications}
+\cventry{May 2023}{Machine Learning Specialization}{DeepLearning.AI \& Stanford University}{}{}{}
+\cventry{January 2024}{NPTEL Python for Data Science}{IIT Madras - Grade A+ (79\%)}{}{}{}
+\cventry{September 2024}{HackerRank Problem Solving}{HackerRank}{}{}{}
+
+\end{document}
