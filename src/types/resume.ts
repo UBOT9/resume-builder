@@ -7,6 +7,11 @@ export interface PersonalInfo {
   linkedin?: string;
   github?: string;
   summary: string;
+  // New dynamic fields
+  topSkills: string[];
+  collegeName: string;
+  graduationYear: string;
+  graduationMonth?: string;
 }
 
 export interface Experience {

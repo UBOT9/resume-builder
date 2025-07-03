@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Mail, Phone, MapPin, Globe, Linkedin, Github } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Globe, Linkedin, Github, Plus, Trash2 } from 'lucide-react';
 import { PersonalInfo } from '../../types/resume';
 
 interface PersonalInfoFormProps {
@@ -8,8 +8,27 @@ interface PersonalInfoFormProps {
 }
 
 export const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ data, onChange }) => {
-  const handleChange = (field: keyof PersonalInfo, value: string) => {
+  const handleChange = (field: keyof PersonalInfo, value: string | string[]) => {
     onChange({ [field]: value });
+  };
+
+  const addTopSkill = () => {
+    const currentSkills = data.topSkills || [];
+    if (currentSkills.length < 3) {
+      handleChange('topSkills', [...currentSkills, '']);
+    }
+  };
+
+  const updateTopSkill = (index: number, value: string) => {
+    const currentSkills = [...(data.topSkills || [])];
+    currentSkills[index] = value;
+    handleChange('topSkills', currentSkills);
+  };
+
+  const removeTopSkill = (index: number) => {
+    const currentSkills = data.topSkills || [];
+    const newSkills = currentSkills.filter((_, i) => i !== index);
+    handleChange('topSkills', newSkills);
   };
 
   return (
@@ -132,6 +151,109 @@ export const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ data, onChan
             />
           </div>
         </div>
+      </div>
+
+      {/* Top Skills Section */}
+      <div className="mt-6">
+        <div className="flex items-center justify-between mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Top 3 Professional Skills *
+          </label>
+          {(!data.topSkills || data.topSkills.length < 3) && (
+            <button
+              onClick={addTopSkill}
+              className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 text-sm font-medium"
+            >
+              <Plus className="h-4 w-4" />
+              <span>Add Skill</span>
+            </button>
+          )}
+        </div>
+        <div className="space-y-3">
+          {(data.topSkills || []).map((skill, index) => (
+            <div key={index} className="flex items-center space-x-2">
+              <input
+                type="text"
+                value={skill}
+                onChange={(e) => updateTopSkill(index, e.target.value)}
+                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                placeholder={`Professional skill ${index + 1} (e.g., Machine Learning Engineer)`}
+                required
+              />
+              <button
+                onClick={() => removeTopSkill(index)}
+                className="text-red-500 hover:text-red-700"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+        <p className="text-sm text-gray-500 mt-2">
+          These will appear in your header as "Skill 1 • Skill 2 • Skill 3"
+        </p>
+      </div>
+
+      {/* College Information Section */}
+      <div className="mt-6">
+        <h3 className="text-lg font-medium text-gray-900 mb-4">College Information</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              College/University Name *
+            </label>
+            <input
+              type="text"
+              value={data.collegeName || ''}
+              onChange={(e) => handleChange('collegeName', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              placeholder="PES Modern College of Engineering"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Graduation Year *
+            </label>
+            <input
+              type="number"
+              min="2020"
+              max="2030"
+              value={data.graduationYear || ''}
+              onChange={(e) => handleChange('graduationYear', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              placeholder="2025"
+              required
+            />
+          </div>
+        </div>
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Graduation Month (Optional)
+          </label>
+          <select
+            value={data.graduationMonth || ''}
+            onChange={(e) => handleChange('graduationMonth', e.target.value)}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          >
+            <option value="">Select month (optional)</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>
+        </div>
+        <p className="text-sm text-gray-500 mt-2">
+          This will appear as "{data.graduationMonth || 'Month'} {data.graduationYear || 'Year'} Pass out" in your header
+        </p>
       </div>
 
       <div className="mt-6">

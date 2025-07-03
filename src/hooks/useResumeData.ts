@@ -10,7 +10,11 @@ const initialResumeData: ResumeData = {
     website: '',
     linkedin: '',
     github: '',
-    summary: ''
+    summary: '',
+    topSkills: ['Machine Learning Engineer', 'Data Science', 'Python Developer'],
+    collegeName: 'PES Modern College of Engineering',
+    graduationYear: '2025',
+    graduationMonth: 'June'
   },
   experience: [],
   education: [],
@@ -29,7 +33,19 @@ export const useResumeData = () => {
     if (savedData) {
       try {
         const parsed = JSON.parse(savedData);
-        // Ensure certifications array exists for backward compatibility
+        // Ensure new fields exist for backward compatibility
+        if (!parsed.personalInfo.topSkills) {
+          parsed.personalInfo.topSkills = ['Machine Learning Engineer', 'Data Science', 'Python Developer'];
+        }
+        if (!parsed.personalInfo.collegeName) {
+          parsed.personalInfo.collegeName = 'PES Modern College of Engineering';
+        }
+        if (!parsed.personalInfo.graduationYear) {
+          parsed.personalInfo.graduationYear = '2025';
+        }
+        if (!parsed.personalInfo.graduationMonth) {
+          parsed.personalInfo.graduationMonth = 'June';
+        }
         if (!parsed.certifications) {
           parsed.certifications = [];
         }

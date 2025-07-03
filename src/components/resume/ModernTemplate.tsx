@@ -13,6 +13,19 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   };
 
+  // Generate dynamic header content
+  const getTopSkillsLine = () => {
+    const skills = data.personalInfo.topSkills || ['Machine Learning Engineer', 'Data Science', 'Python Developer'];
+    return skills.filter(skill => skill.trim()).join(' • ');
+  };
+
+  const getCollegeLine = () => {
+    const collegeName = data.personalInfo.collegeName || 'PES Modern College of Engineering';
+    const graduationMonth = data.personalInfo.graduationMonth || 'June';
+    const graduationYear = data.personalInfo.graduationYear || '2025';
+    return `${collegeName} • ${graduationMonth} ${graduationYear} Pass out`;
+  };
+
   return (
     <div className="max-w-4xl mx-auto bg-white shadow-lg" id="resume-preview" style={{
       fontFamily: 'Arial, sans-serif',
@@ -22,8 +35,15 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
       minHeight: '1123px',
       width: '794px'
     }}>
-      {/* Header - Matching the LaTeX style exactly */}
-      <div className="text-center" style={{ padding: '40px 40px 20px 40px' }}>
+      {/* Header - Matching the LaTeX style exactly with proper centering */}
+      <div style={{ 
+        textAlign: 'center', 
+        padding: '40px 40px 20px 40px',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}>
         {/* Name - Large serif font, all caps, bold */}
         <h1 style={{
           fontFamily: 'Times New Roman, serif',
@@ -33,7 +53,9 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           marginBottom: '8px',
           textTransform: 'uppercase',
           letterSpacing: '1px',
-          lineHeight: '1.2'
+          lineHeight: '1.2',
+          textAlign: 'center',
+          width: '100%'
         }}>
           {data.personalInfo.fullName.toUpperCase()}
         </h1>
@@ -44,13 +66,15 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           fontSize: '12px',
           color: '#000000',
           marginBottom: '6px',
-          lineHeight: '1.4'
+          lineHeight: '1.4',
+          textAlign: 'center',
+          width: '100%'
         }}>
-          Machine Learning Engineer • Data Science • Python Developer
+          {getTopSkillsLine()}
         </p>
         
         {/* College and portfolio line - same styling as title */}
-        <p style={{
+        <div style={{
           fontFamily: 'Arial, sans-serif',
           fontSize: '12px',
           color: '#000000',
@@ -59,9 +83,10 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '4px'
+          gap: '4px',
+          width: '100%'
         }}>
-          <span>PES Modern College of Engineering • June 2025 Pass out</span>
+          <span>{getCollegeLine()}</span>
           <Globe style={{ width: '12px', height: '12px', marginLeft: '4px', marginRight: '2px' }} />
           <span style={{ textDecoration: 'underline' }}>
             {data.personalInfo.website ? 
@@ -69,7 +94,7 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
               'alokahirrao.netlify.app'
             }
           </span>
-        </p>
+        </div>
         
         {/* Contact information line - smaller font with icons */}
         <div style={{ 
@@ -80,7 +105,8 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           justifyContent: 'center',
           alignItems: 'center',
           gap: '16px',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          width: '100%'
         }}>
           {data.personalInfo.phone && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
