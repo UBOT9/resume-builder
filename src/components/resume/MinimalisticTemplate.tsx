@@ -30,10 +30,21 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
     return `${startYear}`;
   };
 
-  // Generate dynamic header content
+  // Generate dynamic header content exactly like reference image
   const getTopSkillsLine = () => {
     const skills = data.personalInfo.topSkills || ['Machine Learning Engineer', 'Data Science', 'Python Developer'];
     return skills.filter(skill => skill.trim()).join(' • ');
+  };
+
+  const getCollegeLine = () => {
+    const collegeName = data.personalInfo.collegeName || 'PES Modern College of Engineering';
+    const graduationMonth = data.personalInfo.graduationMonth || 'June';
+    const graduationYear = data.personalInfo.graduationYear || '2025';
+    const website = data.personalInfo.website ? 
+      data.personalInfo.website.replace('https://', '').replace('http://', '') : 
+      'alokahirrao.netlify.app';
+    
+    return `${collegeName} • ${graduationMonth} ${graduationYear} Pass out • ${website}`;
   };
 
   return (
@@ -87,7 +98,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
           {getTopSkillsLine()}
         </p>
         
-        {/* Website line */}
+        {/* College and website line - EXACTLY like reference image */}
         <div style={{
           fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
           fontSize: '11pt',
@@ -103,10 +114,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         }}>
           <Globe style={{ width: '11px', height: '11px', flexShrink: 0 }} />
           <span style={{ textDecoration: 'underline' }}>
-            {data.personalInfo.website ? 
-              data.personalInfo.website.replace('https://', '').replace('http://', '') : 
-              'alokahirrao.netlify.app'
-            }
+            {getCollegeLine()}
           </span>
         </div>
         

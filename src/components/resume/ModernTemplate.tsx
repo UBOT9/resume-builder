@@ -13,7 +13,7 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   };
 
-  // Generate dynamic header content
+  // Generate dynamic header content exactly like reference image
   const getTopSkillsLine = () => {
     const skills = data.personalInfo.topSkills || ['Machine Learning Engineer', 'Data Science', 'Python Developer'];
     return skills.filter(skill => skill.trim()).join(' • ');
@@ -23,7 +23,11 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
     const collegeName = data.personalInfo.collegeName || 'PES Modern College of Engineering';
     const graduationMonth = data.personalInfo.graduationMonth || 'June';
     const graduationYear = data.personalInfo.graduationYear || '2025';
-    return `${collegeName} • ${graduationMonth} ${graduationYear} Pass out`;
+    const website = data.personalInfo.website ? 
+      data.personalInfo.website.replace('https://', '').replace('http://', '') : 
+      'alokahirrao.netlify.app';
+    
+    return `${collegeName} • ${graduationMonth} ${graduationYear} Pass out • ${website}`;
   };
 
   return (
@@ -84,7 +88,7 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           {getTopSkillsLine()}
         </p>
         
-        {/* College and portfolio line - same styling as title */}
+        {/* College and portfolio line - EXACTLY like reference image */}
         <div style={{
           fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
           fontSize: '12pt',
@@ -99,13 +103,9 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           flexWrap: 'wrap',
           fontWeight: 'normal'
         }}>
-          <span style={{ textAlign: 'center' }}>{getCollegeLine()}</span>
           <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
           <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>
-            {data.personalInfo.website ? 
-              data.personalInfo.website.replace('https://', '').replace('http://', '') : 
-              'alokahirrao.netlify.app'
-            }
+            {getCollegeLine()}
           </span>
         </div>
         
@@ -363,7 +363,7 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                         fontSize: '10pt',
                         color: '#666666'
                       }}>
-                        {formatDate(edu.graduationDate)}
+                        {edu.startYear} - {edu.endYear}
                       </p>
                       {edu.gpa && (
                         <p style={{
@@ -371,16 +371,7 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                           fontSize: '10pt',
                           color: '#666666'
                         }}>
-                          GPA: {edu.gpa}
-                        </p>
-                      )}
-                      {edu.honors && (
-                        <p style={{
-                          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-                          fontSize: '10pt',
-                          color: '#666666'
-                        }}>
-                          {edu.honors}
+                          {edu.gradeType === 'percentage' ? 'Percentage' : 'CGPA'}: {edu.gpa}
                         </p>
                       )}
                     </div>
