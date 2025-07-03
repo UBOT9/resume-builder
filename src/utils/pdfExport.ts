@@ -118,11 +118,29 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
 
     if (collegeInfo.length > 0) {
       const collegeText = collegeInfo.join(' • ');
-      yPosition = addText(collegeText, 0, yPosition, {
-        fontSize: 12,
-        align: 'center',
-        link: resumeData.personalInfo.website
-      });
+      
+      // Check if the text is too long for one line
+      pdf.setFontSize(12);
+      const textWidth = pdf.getTextWidth(collegeText);
+      const maxLineWidth = contentWidth;
+      
+      if (textWidth > maxLineWidth) {
+        // Split into multiple lines if too long
+        const lines = pdf.splitTextToSize(collegeText, maxLineWidth);
+        lines.forEach((line: string) => {
+          yPosition = addText(line, 0, yPosition, {
+            fontSize: 12,
+            align: 'center',
+            link: resumeData.personalInfo.website
+          });
+        });
+      } else {
+        yPosition = addText(collegeText, 0, yPosition, {
+          fontSize: 12,
+          align: 'center',
+          link: resumeData.personalInfo.website
+        });
+      }
       yPosition += 2;
     }
 
@@ -155,10 +173,32 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
     // Format contact info exactly like the reference image
     if (contactItems.length > 0) {
       const contactText = contactItems.join('    '); // Use 4 spaces for separation like in reference
-      yPosition = addText(contactText, 0, yPosition, {
-        fontSize: 10,
-        align: 'center'
-      });
+      
+      // Check if contact line is too long
+      pdf.setFontSize(10);
+      const contactWidth = pdf.getTextWidth(contactText);
+      
+      if (contactWidth > contentWidth) {
+        // Split contact info into two lines if too long
+        const midPoint = Math.ceil(contactItems.length / 2);
+        const firstLine = contactItems.slice(0, midPoint).join('    ');
+        const secondLine = contactItems.slice(midPoint).join('    ');
+        
+        yPosition = addText(firstLine, 0, yPosition, {
+          fontSize: 10,
+          align: 'center'
+        });
+        
+        yPosition = addText(secondLine, 0, yPosition, {
+          fontSize: 10,
+          align: 'center'
+        });
+      } else {
+        yPosition = addText(contactText, 0, yPosition, {
+          fontSize: 10,
+          align: 'center'
+        });
+      }
     }
 
     yPosition += 8; // Extra spacing before sections
