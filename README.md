@@ -1,110 +1,122 @@
 # LaTeX Resume Template - Alok Ahirrao Style
 
-This LaTeX template replicates the exact design and formatting from the provided resume images.
+This LaTeX template replicates the exact design and formatting from the provided resume images, with special attention to the header section styling.
 
-## Features
+## Key Header Modifications
 
-- **Exact Visual Match**: Replicates the font styles, spacing, and layout from the reference images
-- **Two-Page Layout**: Properly distributed content across two pages
-- **Professional Formatting**: Clean, modern design with proper typography
-- **Customizable**: Easy to modify content while maintaining the visual style
+The header section has been precisely modified to match the reference image:
+
+### 1. Name Styling ("ALOK AHIRRAO")
+- **Font**: Times New Roman (serif font) using `\rmfamily`
+- **Size**: 28pt font size for prominence
+- **Style**: Bold (`\bfseries`) and all uppercase (`\MakeUppercase`)
+- **Spacing**: Proper vertical spacing with `\\[8pt]`
+
+### 2. Professional Title Line
+- **Content**: "Machine Learning Engineer • Data Science • Python Developer"
+- **Font**: Arial (sans-serif) using `\sffamily`
+- **Size**: 12pt font size
+- **Separators**: Bullet points (`\textbullet`) with proper spacing
+- **Alignment**: Centered
+
+### 3. College & Portfolio Line
+- **Content**: "PES Modern College of Engineering • June 2025 Pass out 🌐 alokahirrao.netlify.app"
+- **Font**: Arial (sans-serif) matching the title line
+- **Size**: 12pt font size
+- **Globe Icon**: FontAwesome globe icon (`\faGlobe`) with proper vertical alignment
+- **Link Styling**: Underlined portfolio URL (`\underline{alokahirrao.netlify.app}`)
+
+### 4. Contact Information Line
+- **Font**: Arial (sans-serif) at 10pt for compact appearance
+- **Icons**: FontAwesome icons for phone, email, LinkedIn, and GitHub
+- **Spacing**: Proper horizontal spacing using `\quad`
+- **Links**: All contact links are underlined for consistency
+- **Alignment**: All icons vertically aligned with text using `\raisebox{-0.1\height}`
+
+## Technical Implementation
+
+### Font Setup
+```latex
+\usepackage{fontspec} % For custom fonts
+\setmainfont{Times New Roman} % Serif font for the name
+\setsansfont{Arial} % Sans-serif for other text
+```
+
+### Custom Header Code
+```latex
+\begin{center}
+    % Name - Large serif font, all caps, bold
+    {\fontsize{28}{34}\selectfont\rmfamily\bfseries\MakeUppercase{ALOK AHIRRAO}} \\[8pt]
+    
+    % Professional title line
+    {\fontsize{12}{14}\selectfont\sffamily Machine Learning Engineer \textbullet\ Data Science \textbullet\ Python Developer} \\[6pt]
+    
+    % College and portfolio line
+    {\fontsize{12}{14}\selectfont\sffamily PES Modern College of Engineering \textbullet\ June 2025 Pass out \raisebox{-0.1\height}{\faGlobe}\ \underline{alokahirrao.netlify.app}} \\[6pt]
+    
+    % Contact information line
+    {\fontsize{10}{12}\selectfont\sffamily 
+    \raisebox{-0.1\height}{\faPhone}\ +91-9579472584 \quad
+    \raisebox{-0.1\height}{\faEnvelope}\ \underline{alokahirrao.ai@gmail.com} \quad
+    \raisebox{-0.1\height}{\faLinkedin}\ \underline{linkedin.com/in/alokahirrao} \quad
+    \raisebox{-0.1\height}{\faGithub}\ \underline{github.com/alok-ahirrao}}
+\end{center}
+```
 
 ## Requirements
 
 To compile this resume, you need:
 
-1. **LaTeX Distribution**: TeX Live (recommended) or MiKTeX
+1. **LaTeX Distribution**: TeX Live (recommended) or MiKTeX with XeLaTeX support
 2. **Required Packages**:
    - moderncv (or use the included simplified version)
    - fontawesome
+   - fontspec (for custom fonts)
    - geometry
    - xcolor
    - enumitem
    - microtype
 
-## Installation & Compilation
+## Compilation
 
-### Option 1: Using Full ModernCV Package
-
-1. Install the moderncv package:
-   ```bash
-   # On Ubuntu/Debian
-   sudo apt-get install texlive-latex-extra
-   
-   # On macOS with MacTeX
-   # ModernCV is included in MacTeX
-   
-   # On Windows with MiKTeX
-   # Use MiKTeX Package Manager to install moderncv
-   ```
-
-2. Compile the resume:
-   ```bash
-   chmod +x compile.sh
-   ./compile.sh
-   ```
-
-### Option 2: Using Included Simplified Class
-
-If you don't have moderncv installed, you can use the included simplified class file:
+**Important**: This template requires XeLaTeX for font support:
 
 ```bash
-pdflatex main.tex
-pdflatex main.tex  # Run twice for proper formatting
+xelatex main.tex
+xelatex main.tex  # Run twice for proper formatting
 ```
 
-## Key Design Elements Replicated
+Or use the provided script:
+```bash
+chmod +x compile.sh
+./compile.sh
+```
 
-### Typography & Fonts
-- **Name**: Large, bold sans-serif font (matching the prominent header)
-- **Section Headers**: Bold, uppercase formatting with horizontal rules
-- **Job Titles**: Bold formatting for company names and positions
-- **Dates**: Right-aligned, consistent formatting
-- **Body Text**: Clean, readable font with proper line spacing
+## Font Requirements
 
-### Layout Structure
-- **Header**: Centered name, title, and contact information
-- **Contact Info**: Horizontal layout with icons and proper spacing
-- **Sections**: Clear hierarchy with bold headers and horizontal separators
-- **Content**: Proper indentation and bullet point formatting
-- **Spacing**: Exact margins and white space matching the reference
+The template uses:
+- **Times New Roman** for the name (serif)
+- **Arial** for all other text (sans-serif)
 
-### Content Formatting
-- **Education**: Institution, degree, dates, and GPA formatting
-- **Technical Skills**: Categorized skills with proper grouping
-- **Experience**: Company, position, dates, and bullet points
-- **Projects**: Project names, technologies, and descriptions
-- **Certifications**: Institution, certification name, and dates
+These fonts should be installed on your system. If not available, the template will fall back to default serif and sans-serif fonts.
 
 ## Customization
 
-To customize this template for your own use:
+To customize the header for your own resume:
 
-1. **Personal Information**: Update the `\name`, `\title`, `\phone`, `\email`, etc. commands
-2. **Sections**: Modify the content within each `\section{}` block
-3. **Styling**: Adjust colors, fonts, or spacing in the class file if needed
+1. **Name**: Change "ALOK AHIRRAO" in the first line
+2. **Title**: Modify the professional skills line
+3. **College**: Update the institution and graduation information
+4. **Portfolio**: Replace with your own website URL
+5. **Contact**: Update phone, email, LinkedIn, and GitHub information
 
-## File Structure
+## Key Design Elements Replicated
 
-- `main.tex` - Main resume document
-- `moderncv.cls` - Simplified ModernCV class (if needed)
-- `compile.sh` - Compilation script
-- `README.md` - This documentation
+- **Exact font matching**: Serif for name, sans-serif for content
+- **Precise spacing**: Vertical spacing between lines matches the image
+- **Icon alignment**: All icons properly aligned with text
+- **Link styling**: Consistent underlining for all links
+- **Bullet separators**: Proper bullet points with correct spacing
+- **Font sizes**: Hierarchical sizing matching the reference
 
-## Notes
-
-- The template is designed to fit exactly on two pages as shown in the reference images
-- All content has been transcribed accurately from the provided images
-- Font choices and spacing have been carefully matched to the original design
-- The layout maintains the professional appearance while being easily customizable
-
-## Troubleshooting
-
-If you encounter compilation errors:
-
-1. Ensure all required packages are installed
-2. Try using the included simplified class file
-3. Check that your LaTeX distribution is up to date
-4. Verify that fontawesome package is properly installed
-
-For any issues or customization requests, please refer to the LaTeX documentation or moderncv package documentation.
+The header now precisely matches the visual appearance shown in the reference image while maintaining professional LaTeX formatting standards.

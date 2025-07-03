@@ -15,48 +15,47 @@
 \usepackage{xcolor}
 \usepackage{fontawesome}
 \usepackage{microtype}
+\usepackage{fontspec} % For custom fonts
+
+% Set fonts to match the image
+\setmainfont{Times New Roman} % Serif font for the name
+\setsansfont{Arial} % Sans-serif for other text
 
 % Custom colors
 \definecolor{darkgray}{RGB}{64,64,64}
 \definecolor{mediumgray}{RGB}{128,128,128}
 
-% Custom section formatting
-\renewcommand*{\sectionfont}{\Large\bfseries\upshape}
+% Disable the default header
+\renewcommand*{\makecvtitle}{}
 
-% Personal data
+% Personal data (for reference, but we'll create custom header)
 \name{Alok}{Ahirrao}
-\title{Machine Learning Engineer • Data Science • Python Developer}
-\address{PES Modern College of Engineering • June 2025 Pass out}{}{}
-\phone[mobile]{+91-9579472584}
-\email{alokahirrao.ai@gmail.com}
-\social[linkedin]{linkedin.com/in/alokahirrao}
-\social[github]{github.com/alok-ahirrao}
-\homepage{alokahirrao.netlify.app}
-
-% Custom commands for better formatting
-\newcommand{\cvdoublecolumn}[2]{%
-  \cvitem[0.75em]{}{%
-    \begin{minipage}[t]{\listdoubleitemcolumnwidth}#1\end{minipage}%
-    \hfill%
-    \begin{minipage}[t]{\listdoubleitemcolumnwidth}#2\end{minipage}%
-    }%
-}
-
-\newcommand{\cvreference}[7]{%
-    \textbf{#1}\newline% Name
-    \ifthenelse{\equal{#2}{}}{}{\addresssymbol~#2\newline}%
-    \ifthenelse{\equal{#3}{}}{}{#3\newline}%
-    \ifthenelse{\equal{#4}{}}{}{#4\newline}%
-    \ifthenelse{\equal{#5}{}}{}{\emailsymbol~\texttt{#5}\newline}%
-    \ifthenelse{\equal{#6}{}}{}{\phonesymbol~#6\newline}%
-    \ifthenelse{\equal{#7}{}}{}{\mobilephonesymbol~#7}}
 
 \begin{document}
 
-% Custom header
-\makecvtitle
+% Custom header section matching the image exactly
+\begin{center}
+    % Name - Large serif font, all caps, bold
+    {\fontsize{28}{34}\selectfont\rmfamily\bfseries\MakeUppercase{ALOK AHIRRAO}} \\[8pt]
+    
+    % Professional title line - smaller sans-serif, with bullet separators
+    {\fontsize{12}{14}\selectfont\sffamily Machine Learning Engineer \textbullet\ Data Science \textbullet\ Python Developer} \\[6pt]
+    
+    % College and portfolio line - same size as title, with globe icon
+    {\fontsize{12}{14}\selectfont\sffamily PES Modern College of Engineering \textbullet\ June 2025 Pass out \raisebox{-0.1\height}{\faGlobe}\ \underline{alokahirrao.netlify.app}} \\[6pt]
+    
+    % Contact information line - smaller font with icons
+    {\fontsize{10}{12}\selectfont\sffamily 
+    \raisebox{-0.1\height}{\faPhone}\ +91-9579472584 \quad
+    \raisebox{-0.1\height}{\faEnvelope}\ \underline{alokahirrao.ai@gmail.com} \quad
+    \raisebox{-0.1\height}{\faLinkedin}\ \underline{linkedin.com/in/alokahirrao} \quad
+    \raisebox{-0.1\height}{\faGithub}\ \underline{github.com/alok-ahirrao}}
+\end{center}
 
-\vspace{-1.5cm}
+\vspace{12pt}
+
+% Custom section formatting to match the image
+\renewcommand*{\sectionfont}{\fontsize{14}{16}\selectfont\sffamily\bfseries\MakeUppercase}
 
 \section{Education}
 \cventry{2021--2025}{B.E., Artificial Intelligence and Machine Learning}{PES Modern College of Engineering, Pune}{}{CGPA: 8.17}{}

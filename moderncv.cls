@@ -31,7 +31,7 @@
 \definecolor{color1}{rgb}{0.22,0.45,0.70}% light blue
 \definecolor{color2}{rgb}{0.45,0.45,0.45}% dark grey
 
-% Fonts
+% Fonts - default to sans-serif but allow customization
 \renewcommand{\familydefault}{\sfdefault}
 
 % Symbols
@@ -57,7 +57,7 @@
 \newcommand*{\moderncvstyle}[1]{}
 \newcommand*{\moderncvcolor}[1]{}
 
-% Section formatting
+% Section formatting - customizable
 \newcommand*{\sectionfont}{\Large\bfseries}
 \renewcommand{\section}[1]{%
   \vspace{1em}%
@@ -93,7 +93,7 @@
   \end{tabular*}%
   \par\addvspace{#1}}
 
-% Header
+% Default header (can be overridden)
 \newcommand*{\makecvtitle}{%
   \begin{center}%
     {\Huge\bfseries\textcolor{color0}{\@firstname~\@lastname}}\\[0.5em]%
