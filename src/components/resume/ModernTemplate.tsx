@@ -27,22 +27,29 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white shadow-lg" id="resume-preview" style={{
-      fontFamily: 'Arial, sans-serif',
-      fontSize: '14px',
-      lineHeight: '1.4',
-      color: '#000000',
-      minHeight: '1123px',
-      width: '794px'
-    }}>
+    <div 
+      className="mx-auto bg-white shadow-lg" 
+      id="resume-preview" 
+      style={{
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '14px',
+        lineHeight: '1.4',
+        color: '#000000',
+        minHeight: '1123px',
+        width: '100%',
+        maxWidth: '850px',
+        boxSizing: 'border-box'
+      }}
+    >
       {/* Header - Matching the LaTeX style exactly with proper centering */}
       <div style={{ 
         textAlign: 'center', 
-        padding: '40px 40px 20px 40px',
+        padding: '30px 30px 20px 30px',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        boxSizing: 'border-box'
       }}>
         {/* Name - Large serif font, all caps, bold */}
         <h1 style={{
@@ -55,7 +62,8 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           letterSpacing: '1px',
           lineHeight: '1.2',
           textAlign: 'center',
-          width: '100%'
+          width: '100%',
+          wordWrap: 'break-word'
         }}>
           {data.personalInfo.fullName.toUpperCase()}
         </h1>
@@ -68,7 +76,8 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           marginBottom: '6px',
           lineHeight: '1.4',
           textAlign: 'center',
-          width: '100%'
+          width: '100%',
+          wordWrap: 'break-word'
         }}>
           {getTopSkillsLine()}
         </p>
@@ -84,11 +93,12 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           alignItems: 'center',
           justifyContent: 'center',
           gap: '4px',
-          width: '100%'
+          width: '100%',
+          flexWrap: 'wrap'
         }}>
-          <span>{getCollegeLine()}</span>
-          <Globe style={{ width: '12px', height: '12px', marginLeft: '4px', marginRight: '2px' }} />
-          <span style={{ textDecoration: 'underline' }}>
+          <span style={{ textAlign: 'center' }}>{getCollegeLine()}</span>
+          <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
+          <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>
             {data.personalInfo.website ? 
               data.personalInfo.website.replace('https://', '').replace('http://', '') : 
               'alokahirrao.netlify.app'
@@ -104,34 +114,35 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '16px',
+          gap: '12px',
           flexWrap: 'wrap',
-          width: '100%'
+          width: '100%',
+          marginTop: '4px'
         }}>
           {data.personalInfo.phone && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
               <Phone style={{ width: '10px', height: '10px' }} />
               <span>{data.personalInfo.phone}</span>
             </div>
           )}
           {data.personalInfo.email && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
               <Mail style={{ width: '10px', height: '10px' }} />
-              <span style={{ textDecoration: 'underline' }}>{data.personalInfo.email}</span>
+              <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>{data.personalInfo.email}</span>
             </div>
           )}
           {data.personalInfo.linkedin && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
               <Linkedin style={{ width: '10px', height: '10px' }} />
-              <span style={{ textDecoration: 'underline' }}>
+              <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>
                 {data.personalInfo.linkedin.replace('https://linkedin.com/in/', '').replace('https://www.linkedin.com/in/', 'linkedin.com/in/')}
               </span>
             </div>
           )}
           {data.personalInfo.github && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
               <Github style={{ width: '10px', height: '10px' }} />
-              <span style={{ textDecoration: 'underline' }}>
+              <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>
                 {data.personalInfo.github.replace('https://github.com/', 'github.com/')}
               </span>
             </div>
@@ -139,7 +150,7 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
         </div>
       </div>
 
-      <div style={{ padding: '0 40px 40px 40px' }}>
+      <div style={{ padding: '0 30px 30px 30px', boxSizing: 'border-box' }}>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
@@ -152,13 +163,13 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                 <div className="space-y-6">
                   {data.experience.map((exp) => (
                     <div key={exp.id}>
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="text-lg font-semibold text-gray-800">{exp.position}</h3>
-                          <p className="text-blue-600 font-medium">{exp.company}</p>
-                          <p className="text-gray-600 text-sm">{exp.location}</p>
+                      <div className="flex justify-between items-start mb-2 flex-wrap gap-2">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-lg font-semibold text-gray-800 break-words">{exp.position}</h3>
+                          <p className="text-blue-600 font-medium break-words">{exp.company}</p>
+                          <p className="text-gray-600 text-sm break-words">{exp.location}</p>
                         </div>
-                        <div className="text-right text-sm text-gray-600">
+                        <div className="text-right text-sm text-gray-600 flex-shrink-0">
                           <div className="flex items-center space-x-1">
                             <Calendar className="h-4 w-4" />
                             <span>
@@ -169,7 +180,7 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                       </div>
                       <ul className="list-disc list-inside text-gray-700 space-y-1">
                         {exp.description.map((desc, index) => (
-                          <li key={index}>{desc}</li>
+                          <li key={index} className="break-words">{desc}</li>
                         ))}
                       </ul>
                     </div>
@@ -187,9 +198,9 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                 <div className="space-y-4">
                   {data.projects.map((project) => (
                     <div key={project.id}>
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-lg font-semibold text-gray-800">{project.name}</h3>
-                        <div className="flex space-x-2">
+                      <div className="flex justify-between items-start mb-2 flex-wrap gap-2">
+                        <h3 className="text-lg font-semibold text-gray-800 flex-1 min-w-0 break-words">{project.name}</h3>
+                        <div className="flex space-x-2 flex-shrink-0">
                           {project.link && (
                             <span className="text-blue-600 text-sm">Demo</span>
                           )}
@@ -198,13 +209,13 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                           )}
                         </div>
                       </div>
-                      <p className="text-gray-700 mb-2">{project.description}</p>
+                      <p className="text-gray-700 mb-2 break-words">{project.description}</p>
                       {project.technologies.length > 0 && (
                         <div className="flex flex-wrap gap-2">
                           {project.technologies.map((tech, index) => (
                             <span
                               key={index}
-                              className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"
+                              className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full break-words"
                             >
                               {tech}
                             </span>
@@ -229,15 +240,15 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                 <div className="space-y-4">
                   {data.education.map((edu) => (
                     <div key={edu.id}>
-                      <h3 className="font-semibold text-gray-800">{edu.degree}</h3>
-                      <p className="text-blue-600 font-medium">{edu.institution}</p>
-                      <p className="text-gray-600 text-sm">{edu.location}</p>
+                      <h3 className="font-semibold text-gray-800 break-words">{edu.degree}</h3>
+                      <p className="text-blue-600 font-medium break-words">{edu.institution}</p>
+                      <p className="text-gray-600 text-sm break-words">{edu.location}</p>
                       <p className="text-gray-600 text-sm">{formatDate(edu.graduationDate)}</p>
                       {edu.gpa && (
                         <p className="text-gray-600 text-sm">GPA: {edu.gpa}</p>
                       )}
                       {edu.honors && (
-                        <p className="text-gray-600 text-sm">{edu.honors}</p>
+                        <p className="text-gray-600 text-sm break-words">{edu.honors}</p>
                       )}
                     </div>
                   ))}
@@ -264,7 +275,7 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                       <h3 className="font-semibold text-gray-800 mb-2">{categoryName}</h3>
                       <div className="space-y-2">
                         {categorySkills.map((skill) => (
-                          <div key={skill.id} className="text-gray-700 text-sm">
+                          <div key={skill.id} className="text-gray-700 text-sm break-words">
                             {skill.name}
                           </div>
                         ))}
@@ -284,11 +295,11 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                 <div className="space-y-4">
                   {data.certifications.map((cert) => (
                     <div key={cert.id}>
-                      <h3 className="font-semibold text-gray-800">{cert.name}</h3>
-                      <p className="text-blue-600 font-medium">{cert.issuer}</p>
+                      <h3 className="font-semibold text-gray-800 break-words">{cert.name}</h3>
+                      <p className="text-blue-600 font-medium break-words">{cert.issuer}</p>
                       <p className="text-gray-600 text-sm">{formatDate(cert.issueDate)}</p>
                       {cert.credentialId && (
-                        <p className="text-gray-600 text-sm">ID: {cert.credentialId}</p>
+                        <p className="text-gray-600 text-sm break-words">ID: {cert.credentialId}</p>
                       )}
                     </div>
                   ))}

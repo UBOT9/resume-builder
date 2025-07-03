@@ -27,15 +27,21 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white" id="resume-preview" style={{ 
-      fontFamily: 'Arial, sans-serif',
-      fontSize: '14px',
-      lineHeight: '1.4',
-      color: '#000000',
-      padding: '40px',
-      minHeight: '1123px',
-      width: '794px'
-    }}>
+    <div 
+      className="mx-auto bg-white" 
+      id="resume-preview" 
+      style={{ 
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '14px',
+        lineHeight: '1.4',
+        color: '#000000',
+        padding: '30px',
+        minHeight: '1123px',
+        width: '100%',
+        maxWidth: '850px',
+        boxSizing: 'border-box'
+      }}
+    >
       {/* Header - Matching the LaTeX style exactly with proper centering */}
       <div style={{ 
         textAlign: 'center', 
@@ -43,7 +49,9 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '0 20px',
+        boxSizing: 'border-box'
       }}>
         {/* Name - Large serif font, all caps, bold */}
         <h1 style={{
@@ -56,7 +64,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           letterSpacing: '1px',
           lineHeight: '1.2',
           textAlign: 'center',
-          width: '100%'
+          width: '100%',
+          wordWrap: 'break-word'
         }}>
           {data.personalInfo.fullName.toUpperCase()}
         </h1>
@@ -69,7 +78,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           marginBottom: '6px',
           lineHeight: '1.4',
           textAlign: 'center',
-          width: '100%'
+          width: '100%',
+          wordWrap: 'break-word'
         }}>
           {getTopSkillsLine()}
         </p>
@@ -85,11 +95,12 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           alignItems: 'center',
           justifyContent: 'center',
           gap: '4px',
-          width: '100%'
+          width: '100%',
+          flexWrap: 'wrap'
         }}>
-          <span>{getCollegeLine()}</span>
-          <Globe style={{ width: '12px', height: '12px', marginLeft: '4px', marginRight: '2px' }} />
-          <span style={{ textDecoration: 'underline' }}>
+          <span style={{ textAlign: 'center' }}>{getCollegeLine()}</span>
+          <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
+          <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>
             {data.personalInfo.website ? 
               data.personalInfo.website.replace('https://', '').replace('http://', '') : 
               'alokahirrao.netlify.app'
@@ -105,34 +116,35 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '16px',
+          gap: '12px',
           flexWrap: 'wrap',
-          width: '100%'
+          width: '100%',
+          marginTop: '4px'
         }}>
           {data.personalInfo.phone && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
               <Phone style={{ width: '10px', height: '10px' }} />
               <span>{data.personalInfo.phone}</span>
             </div>
           )}
           {data.personalInfo.email && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
               <Mail style={{ width: '10px', height: '10px' }} />
-              <span style={{ textDecoration: 'underline' }}>{data.personalInfo.email}</span>
+              <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>{data.personalInfo.email}</span>
             </div>
           )}
           {data.personalInfo.linkedin && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
               <Linkedin style={{ width: '10px', height: '10px' }} />
-              <span style={{ textDecoration: 'underline' }}>
+              <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>
                 {data.personalInfo.linkedin.replace('https://linkedin.com/in/', '').replace('https://www.linkedin.com/in/', 'linkedin.com/in/')}
               </span>
             </div>
           )}
           {data.personalInfo.github && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
               <Github style={{ width: '10px', height: '10px' }} />
-              <span style={{ textDecoration: 'underline' }}>
+              <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>
                 {data.personalInfo.github.replace('https://github.com/', 'github.com/')}
               </span>
             </div>
@@ -157,20 +169,22 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {data.education.map((edu) => (
               <div key={edu.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
+                  <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{
                       fontSize: '14px',
                       fontWeight: 'bold',
                       color: '#000000',
-                      marginBottom: '2px'
+                      marginBottom: '2px',
+                      wordWrap: 'break-word'
                     }}>
                       {edu.degree}
                     </h3>
                     <div style={{
                       fontSize: '12px',
                       color: '#000000',
-                      marginBottom: '2px'
+                      marginBottom: '2px',
+                      wordWrap: 'break-word'
                     }}>
                       {edu.institution}, {edu.location}
                     </div>
@@ -178,7 +192,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                   <div style={{
                     fontSize: '12px',
                     fontWeight: 'bold',
-                    color: '#000000'
+                    color: '#000000',
+                    flexShrink: 0
                   }}>
                     {formatDate(edu.graduationDate)}
                   </div>
@@ -187,7 +202,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                   <div style={{
                     fontSize: '11px',
                     color: '#000000',
-                    marginTop: '2px'
+                    marginTop: '2px',
+                    wordWrap: 'break-word'
                   }}>
                     {edu.gpa && <span>GPA: {edu.gpa}</span>}
                     {edu.gpa && edu.honors && <span> • </span>}
@@ -216,19 +232,21 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {data.experience.map((exp) => (
               <div key={exp.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
-                  <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px', flexWrap: 'wrap', gap: '8px' }}>
+                  <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{
                       fontSize: '14px',
                       fontWeight: 'bold',
                       color: '#000000',
-                      marginBottom: '2px'
+                      marginBottom: '2px',
+                      wordWrap: 'break-word'
                     }}>
                       {exp.position}
                     </h3>
                     <div style={{
                       fontSize: '12px',
-                      color: '#000000'
+                      color: '#000000',
+                      wordWrap: 'break-word'
                     }}>
                       {exp.company}, {exp.location}
                     </div>
@@ -236,7 +254,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                   <div style={{
                     fontSize: '12px',
                     fontWeight: 'bold',
-                    color: '#000000'
+                    color: '#000000',
+                    flexShrink: 0
                   }}>
                     {formatDate(exp.startDate)} - {exp.current ? 'Present' : formatDate(exp.endDate)}
                   </div>
@@ -251,7 +270,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                     <li key={index} style={{
                       fontSize: '12px',
                       lineHeight: '1.4',
-                      marginBottom: '4px'
+                      marginBottom: '4px',
+                      wordWrap: 'break-word'
                     }}>
                       {desc}
                     </li>
@@ -296,7 +316,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                 <div style={{
                   fontSize: '12px',
                   color: '#000000',
-                  lineHeight: '1.4'
+                  lineHeight: '1.4',
+                  wordWrap: 'break-word'
                 }}>
                   {categorySkills.map(skill => skill.name).join(', ')}
                 </div>
@@ -326,7 +347,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                   fontSize: '14px',
                   fontWeight: 'bold',
                   color: '#000000',
-                  marginBottom: '4px'
+                  marginBottom: '4px',
+                  wordWrap: 'break-word'
                 }}>
                   {project.name}
                 </h3>
@@ -334,7 +356,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                   fontSize: '12px',
                   color: '#000000',
                   lineHeight: '1.4',
-                  marginBottom: '4px'
+                  marginBottom: '4px',
+                  wordWrap: 'break-word'
                 }}>
                   {project.description}
                 </p>
@@ -342,7 +365,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                   <div style={{
                     fontSize: '11px',
                     color: '#000000',
-                    marginBottom: '4px'
+                    marginBottom: '4px',
+                    wordWrap: 'break-word'
                   }}>
                     <strong>Technologies:</strong> {project.technologies.join(', ')}
                   </div>
@@ -369,19 +393,21 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {data.certifications.map((cert) => (
               <div key={cert.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
+                  <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{
                       fontSize: '12px',
                       fontWeight: 'bold',
                       color: '#000000',
-                      marginBottom: '2px'
+                      marginBottom: '2px',
+                      wordWrap: 'break-word'
                     }}>
                       {cert.name}
                     </h3>
                     <div style={{
                       fontSize: '11px',
-                      color: '#000000'
+                      color: '#000000',
+                      wordWrap: 'break-word'
                     }}>
                       {cert.issuer}
                     </div>
@@ -389,7 +415,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                   <div style={{
                     fontSize: '11px',
                     fontWeight: 'bold',
-                    color: '#000000'
+                    color: '#000000',
+                    flexShrink: 0
                   }}>
                     {formatDate(cert.issueDate)}
                   </div>
