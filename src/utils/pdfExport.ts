@@ -111,11 +111,12 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
     
     if (resumeData.personalInfo.website) {
       const websiteDisplay = resumeData.personalInfo.website.replace('https://', '').replace('http://', '');
-      collegeInfo.push(`🌐 ${websiteDisplay}`);
+      collegeInfo.push(websiteDisplay);
     }
 
     if (collegeInfo.length > 0) {
-      yPosition = addText(collegeInfo.join(' • '), 0, yPosition, {
+      const collegeText = collegeInfo.join(' • ');
+      yPosition = addText(collegeText, 0, yPosition, {
         fontSize: 12,
         align: 'center',
         link: resumeData.personalInfo.website
@@ -127,11 +128,11 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
     const contactItems = [];
     
     if (resumeData.personalInfo.phone) {
-      contactItems.push(`📞 ${resumeData.personalInfo.phone}`);
+      contactItems.push(`Phone: ${resumeData.personalInfo.phone}`);
     }
     
     if (resumeData.personalInfo.email) {
-      contactItems.push(`✉ ${resumeData.personalInfo.email}`);
+      contactItems.push(`Email: ${resumeData.personalInfo.email}`);
     }
     
     if (resumeData.personalInfo.linkedin) {
@@ -139,29 +140,30 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
         .replace('https://linkedin.com/in/', '')
         .replace('https://www.linkedin.com/in/', '')
         .replace('linkedin.com/in/', '');
-      contactItems.push(`🔗 linkedin.com/in/${linkedinDisplay}`);
+      contactItems.push(`LinkedIn: linkedin.com/in/${linkedinDisplay}`);
     }
     
     if (resumeData.personalInfo.github) {
       const githubDisplay = resumeData.personalInfo.github
         .replace('https://github.com/', '')
         .replace('github.com/', '');
-      contactItems.push(`🐙 github.com/${githubDisplay}`);
+      contactItems.push(`GitHub: github.com/${githubDisplay}`);
     }
 
     // Split contact info into multiple lines if too long
     if (contactItems.length > 0) {
-      const contactText = contactItems.join('    '); // Use 4 spaces for better separation
-      
-      // Check if text is too long for one line
-      pdf.setFontSize(10);
-      const textWidth = pdf.getTextWidth(contactText);
-      const maxLineWidth = contentWidth;
-      
-      if (textWidth > maxLineWidth && contactItems.length > 2) {
-        // Split into two lines
-        const firstLine = contactItems.slice(0, 2).join('    ');
-        const secondLine = contactItems.slice(2).join('    ');
+      // Check if we need to split into multiple lines
+      if (contactItems.length <= 2) {
+        // Single line for 1-2 items
+        const contactText = contactItems.join('  |  ');
+        yPosition = addText(contactText, 0, yPosition, {
+          fontSize: 10,
+          align: 'center'
+        });
+      } else {
+        // Split into two lines for better readability
+        const firstLine = contactItems.slice(0, 2).join('  |  ');
+        const secondLine = contactItems.slice(2).join('  |  ');
         
         yPosition = addText(firstLine, 0, yPosition, {
           fontSize: 10,
@@ -169,11 +171,6 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
         });
         
         yPosition = addText(secondLine, 0, yPosition, {
-          fontSize: 10,
-          align: 'center'
-        });
-      } else {
-        yPosition = addText(contactText, 0, yPosition, {
           fontSize: 10,
           align: 'center'
         });
@@ -196,7 +193,7 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
         pdf.setFontSize(12);
         pdf.setFont('times', 'bold');
         pdf.text(edu.institution + (edu.location ? `, ${edu.location}` : ''), margin, yPosition);
-        pdf.text(`${edu.startYear} – ${edu.endYear}`, pageWidth - margin, yPosition, { align: 'right' });
+        pdf.text(`${edu.startYear} - ${edu.endYear}`, pageWidth - margin, yPosition, { align: 'right' });
         yPosition += 5;
 
         // Degree and specialization on left, GPA on right
@@ -333,7 +330,7 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
         const startDate = new Date(exp.startDate + '-01');
         const startText = startDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
         const endText = exp.current ? 'Present' : new Date(exp.endDate + '-01').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-        pdf.text(`${startText} – ${endText}`, pageWidth - margin, yPosition, { align: 'right' });
+        pdf.text(`${startText} - ${endText}`, pageWidth - margin, yPosition, { align: 'right' });
         yPosition += 5;
 
         // Position with duration
@@ -355,7 +352,7 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
             pdf.setFontSize(11);
             pdf.setFont('times', 'normal');
             
-            // Use bullet point with proper indentation
+            // Use simple bullet point with proper indentation
             pdf.text('•', margin + 2, yPosition);
             pdf.text(desc, margin + 8, yPosition, { maxWidth: contentWidth - 15 });
             
