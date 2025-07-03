@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Globe, Linkedin, Github, Calendar, Star } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe, Linkedin, Github, Calendar } from 'lucide-react';
 import { ResumeData } from '../../types/resume';
 
 interface ModernTemplateProps {
@@ -13,71 +13,107 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   };
 
-  const renderStars = (level: number) => {
-    return (
-      <div className="flex space-x-1">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <Star
-            key={star}
-            className={`h-3 w-3 ${
-              star <= level ? 'text-blue-500 fill-current' : 'text-gray-300'
-            }`}
-          />
-        ))}
-      </div>
-    );
-  };
-
   return (
-    <div className="max-w-4xl mx-auto bg-white shadow-lg" id="resume-preview">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-2">{data.personalInfo.fullName}</h1>
-          <p className="text-xl opacity-90 mb-4">{data.personalInfo.summary}</p>
-          
-          <div className="flex flex-wrap justify-center gap-4 text-sm">
-            {data.personalInfo.email && (
-              <div className="flex items-center space-x-1">
-                <Mail className="h-4 w-4" />
-                <span>{data.personalInfo.email}</span>
-              </div>
-            )}
-            {data.personalInfo.phone && (
-              <div className="flex items-center space-x-1">
-                <Phone className="h-4 w-4" />
-                <span>{data.personalInfo.phone}</span>
-              </div>
-            )}
-            {data.personalInfo.location && (
-              <div className="flex items-center space-x-1">
-                <MapPin className="h-4 w-4" />
-                <span>{data.personalInfo.location}</span>
-              </div>
-            )}
-            {data.personalInfo.website && (
-              <div className="flex items-center space-x-1">
-                <Globe className="h-4 w-4" />
-                <span>{data.personalInfo.website.replace('https://', '')}</span>
-              </div>
-            )}
-            {data.personalInfo.linkedin && (
-              <div className="flex items-center space-x-1">
-                <Linkedin className="h-4 w-4" />
-                <span>LinkedIn</span>
-              </div>
-            )}
-            {data.personalInfo.github && (
-              <div className="flex items-center space-x-1">
-                <Github className="h-4 w-4" />
-                <span>GitHub</span>
-              </div>
-            )}
-          </div>
+    <div className="max-w-4xl mx-auto bg-white shadow-lg" id="resume-preview" style={{
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '14px',
+      lineHeight: '1.4',
+      color: '#000000',
+      minHeight: '1123px',
+      width: '794px'
+    }}>
+      {/* Header - Matching the LaTeX style exactly */}
+      <div className="text-center" style={{ padding: '40px 40px 20px 40px' }}>
+        {/* Name - Large serif font, all caps, bold */}
+        <h1 style={{
+          fontFamily: 'Times New Roman, serif',
+          fontSize: '28px',
+          fontWeight: 'bold',
+          color: '#000000',
+          marginBottom: '8px',
+          textTransform: 'uppercase',
+          letterSpacing: '1px',
+          lineHeight: '1.2'
+        }}>
+          {data.personalInfo.fullName.toUpperCase()}
+        </h1>
+        
+        {/* Professional title line - sans-serif with bullet separators */}
+        <p style={{
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '12px',
+          color: '#000000',
+          marginBottom: '6px',
+          lineHeight: '1.4'
+        }}>
+          Machine Learning Engineer • Data Science • Python Developer
+        </p>
+        
+        {/* College and portfolio line - same styling as title */}
+        <p style={{
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '12px',
+          color: '#000000',
+          marginBottom: '6px',
+          lineHeight: '1.4',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '4px'
+        }}>
+          <span>PES Modern College of Engineering • June 2025 Pass out</span>
+          <Globe style={{ width: '12px', height: '12px', marginLeft: '4px', marginRight: '2px' }} />
+          <span style={{ textDecoration: 'underline' }}>
+            {data.personalInfo.website ? 
+              data.personalInfo.website.replace('https://', '').replace('http://', '') : 
+              'alokahirrao.netlify.app'
+            }
+          </span>
+        </p>
+        
+        {/* Contact information line - smaller font with icons */}
+        <div style={{ 
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '10px', 
+          color: '#000000',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '16px',
+          flexWrap: 'wrap'
+        }}>
+          {data.personalInfo.phone && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Phone style={{ width: '10px', height: '10px' }} />
+              <span>{data.personalInfo.phone}</span>
+            </div>
+          )}
+          {data.personalInfo.email && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Mail style={{ width: '10px', height: '10px' }} />
+              <span style={{ textDecoration: 'underline' }}>{data.personalInfo.email}</span>
+            </div>
+          )}
+          {data.personalInfo.linkedin && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Linkedin style={{ width: '10px', height: '10px' }} />
+              <span style={{ textDecoration: 'underline' }}>
+                {data.personalInfo.linkedin.replace('https://linkedin.com/in/', '').replace('https://www.linkedin.com/in/', 'linkedin.com/in/')}
+              </span>
+            </div>
+          )}
+          {data.personalInfo.github && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Github style={{ width: '10px', height: '10px' }} />
+              <span style={{ textDecoration: 'underline' }}>
+                {data.personalInfo.github.replace('https://github.com/', 'github.com/')}
+              </span>
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="p-8">
+      <div style={{ padding: '0 40px 40px 40px' }}>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
@@ -202,15 +238,35 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                       <h3 className="font-semibold text-gray-800 mb-2">{categoryName}</h3>
                       <div className="space-y-2">
                         {categorySkills.map((skill) => (
-                          <div key={skill.id} className="flex justify-between items-center">
-                            <span className="text-gray-700 text-sm">{skill.name}</span>
-                            {renderStars(skill.level)}
+                          <div key={skill.id} className="text-gray-700 text-sm">
+                            {skill.name}
                           </div>
                         ))}
                       </div>
                     </div>
                   );
                 })}
+              </section>
+            )}
+
+            {/* Certifications */}
+            {data.certifications.length > 0 && (
+              <section>
+                <h2 className="text-xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-blue-600">
+                  Certifications
+                </h2>
+                <div className="space-y-4">
+                  {data.certifications.map((cert) => (
+                    <div key={cert.id}>
+                      <h3 className="font-semibold text-gray-800">{cert.name}</h3>
+                      <p className="text-blue-600 font-medium">{cert.issuer}</p>
+                      <p className="text-gray-600 text-sm">{formatDate(cert.issueDate)}</p>
+                      {cert.credentialId && (
+                        <p className="text-gray-600 text-sm">ID: {cert.credentialId}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </section>
             )}
           </div>

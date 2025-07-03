@@ -2,15 +2,15 @@ import React from 'react';
 import { Mail, Phone, MapPin, Globe, Linkedin, Github, Calendar } from 'lucide-react';
 import { ResumeData } from '../../types/resume';
 
-interface MinimalisticTemplateProps {
+interface ClassicTemplateProps {
   data: ResumeData;
 }
 
-export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data }) => {
+export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
     const date = new Date(dateString + '-01');
-    return date.toLocaleDateString('en-US', { month: '2-digit', year: 'numeric' });
+    return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   };
 
   return (
@@ -114,61 +114,58 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         </div>
       </div>
 
-      {/* Education Section */}
+      {/* Rest of the template content with classic styling */}
+      {/* Education */}
       {data.education.length > 0 && (
         <section style={{ marginBottom: '32px' }}>
           <h2 style={{
-            fontSize: '14px',
+            fontSize: '16px',
             fontWeight: 'bold',
             color: '#000000',
             marginBottom: '16px',
-            textTransform: 'uppercase',
-            letterSpacing: '1px'
+            borderBottom: '2px solid #000000',
+            paddingBottom: '4px'
           }}>
             EDUCATION
           </h2>
-          <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '16px' 
-          }}></div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {data.education.map((edu) => (
               <div key={edu.id}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
                     <h3 style={{
-                      fontSize: '12px',
+                      fontSize: '14px',
                       fontWeight: 'bold',
                       color: '#000000',
                       marginBottom: '2px'
                     }}>
-                      {edu.institution}
+                      {edu.degree}
                     </h3>
                     <div style={{
-                      fontSize: '11px',
-                      fontStyle: 'italic',
+                      fontSize: '12px',
                       color: '#000000',
                       marginBottom: '2px'
                     }}>
-                      {edu.degree}
+                      {edu.institution}, {edu.location}
                     </div>
                   </div>
                   <div style={{
-                    fontSize: '11px',
+                    fontSize: '12px',
                     fontWeight: 'bold',
-                    color: '#000000',
-                    textAlign: 'right'
+                    color: '#000000'
                   }}>
                     {formatDate(edu.graduationDate)}
                   </div>
                 </div>
-                {edu.gpa && (
+                {(edu.gpa || edu.honors) && (
                   <div style={{
                     fontSize: '11px',
                     color: '#000000',
                     marginTop: '2px'
                   }}>
-                    CGPA: {edu.gpa}
+                    {edu.gpa && <span>GPA: {edu.gpa}</span>}
+                    {edu.gpa && edu.honors && <span> • </span>}
+                    {edu.honors && <span>{edu.honors}</span>}
                   </div>
                 )}
               </div>
@@ -177,105 +174,45 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         </section>
       )}
 
-      {/* Technical Skills */}
-      {data.skills.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
-          <h2 style={{
-            fontSize: '14px',
-            fontWeight: 'bold',
-            color: '#000000',
-            marginBottom: '16px',
-            textTransform: 'uppercase',
-            letterSpacing: '1px'
-          }}>
-            TECHNICAL SKILLS
-          </h2>
-          <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '16px' 
-          }}></div>
-          
-          {/* Group skills by category */}
-          {['technical', 'soft', 'language'].map((category) => {
-            const categorySkills = data.skills.filter(skill => skill.category === category);
-            if (categorySkills.length === 0) return null;
-            
-            const categoryName = category === 'technical' ? 'Programming Languages' : 
-                               category === 'soft' ? 'Soft Skills' : 'Languages';
-            
-            return (
-              <div key={category} style={{ marginBottom: '12px' }}>
-                <div style={{
-                  fontSize: '11px',
-                  fontWeight: 'bold',
-                  color: '#000000',
-                  marginBottom: '4px'
-                }}>
-                  {categoryName}:
-                </div>
-                <div style={{
-                  fontSize: '11px',
-                  color: '#000000',
-                  lineHeight: '1.4'
-                }}>
-                  {categorySkills.map(skill => skill.name).join(', ')}
-                </div>
-              </div>
-            );
-          })}
-        </section>
-      )}
-
-      {/* Work Experience */}
+      {/* Experience */}
       {data.experience.length > 0 && (
         <section style={{ marginBottom: '32px' }}>
           <h2 style={{
-            fontSize: '14px',
+            fontSize: '16px',
             fontWeight: 'bold',
             color: '#000000',
             marginBottom: '16px',
-            textTransform: 'uppercase',
-            letterSpacing: '1px'
+            borderBottom: '2px solid #000000',
+            paddingBottom: '4px'
           }}>
-            WORK EXPERIENCE
+            EXPERIENCE
           </h2>
-          <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '24px' 
-          }}></div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {data.experience.map((exp) => (
               <div key={exp.id}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
                   <div>
                     <h3 style={{
-                      fontSize: '12px',
+                      fontSize: '14px',
                       fontWeight: 'bold',
                       color: '#000000',
                       marginBottom: '2px'
                     }}>
-                      {exp.company}
+                      {exp.position}
                     </h3>
                     <div style={{
-                      fontSize: '11px',
-                      fontStyle: 'italic',
+                      fontSize: '12px',
                       color: '#000000'
                     }}>
-                      {exp.position}
+                      {exp.company}, {exp.location}
                     </div>
                   </div>
                   <div style={{
-                    fontSize: '11px',
+                    fontSize: '12px',
                     fontWeight: 'bold',
-                    color: '#000000',
-                    textAlign: 'right'
+                    color: '#000000'
                   }}>
                     {formatDate(exp.startDate)} - {exp.current ? 'Present' : formatDate(exp.endDate)}
-                    {exp.location && (
-                      <div style={{ fontSize: '10px', fontWeight: 'normal', fontStyle: 'italic' }}>
-                        {exp.location}
-                      </div>
-                    )}
                   </div>
                 </div>
                 <ul style={{
@@ -286,7 +223,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                 }}>
                   {exp.description.map((desc, index) => (
                     <li key={index} style={{
-                      fontSize: '11px',
+                      fontSize: '12px',
                       lineHeight: '1.4',
                       marginBottom: '4px'
                     }}>
@@ -300,67 +237,90 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         </section>
       )}
 
+      {/* Skills */}
+      {data.skills.length > 0 && (
+        <section style={{ marginBottom: '32px' }}>
+          <h2 style={{
+            fontSize: '16px',
+            fontWeight: 'bold',
+            color: '#000000',
+            marginBottom: '16px',
+            borderBottom: '2px solid #000000',
+            paddingBottom: '4px'
+          }}>
+            SKILLS
+          </h2>
+          {['technical', 'soft', 'language'].map((category) => {
+            const categorySkills = data.skills.filter(skill => skill.category === category);
+            if (categorySkills.length === 0) return null;
+            
+            const categoryName = category === 'technical' ? 'Technical Skills' : 
+                               category === 'soft' ? 'Soft Skills' : 'Languages';
+            
+            return (
+              <div key={category} style={{ marginBottom: '12px' }}>
+                <div style={{
+                  fontSize: '12px',
+                  fontWeight: 'bold',
+                  color: '#000000',
+                  marginBottom: '4px'
+                }}>
+                  {categoryName}:
+                </div>
+                <div style={{
+                  fontSize: '12px',
+                  color: '#000000',
+                  lineHeight: '1.4'
+                }}>
+                  {categorySkills.map(skill => skill.name).join(', ')}
+                </div>
+              </div>
+            );
+          })}
+        </section>
+      )}
+
       {/* Projects */}
       {data.projects.length > 0 && (
         <section style={{ marginBottom: '32px' }}>
           <h2 style={{
-            fontSize: '14px',
+            fontSize: '16px',
             fontWeight: 'bold',
             color: '#000000',
             marginBottom: '16px',
-            textTransform: 'uppercase',
-            letterSpacing: '1px'
+            borderBottom: '2px solid #000000',
+            paddingBottom: '4px'
           }}>
             PROJECTS
           </h2>
-          <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '24px' 
-          }}></div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {data.projects.map((project) => (
               <div key={project.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
-                  <h3 style={{
-                    fontSize: '12px',
-                    fontWeight: 'bold',
-                    color: '#000000'
-                  }}>
-                    {project.name}
-                  </h3>
-                  <div style={{
-                    fontSize: '11px',
-                    fontWeight: 'bold',
-                    color: '#000000'
-                  }}>
-                    2024
-                  </div>
-                </div>
+                <h3 style={{
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  color: '#000000',
+                  marginBottom: '4px'
+                }}>
+                  {project.name}
+                </h3>
+                <p style={{
+                  fontSize: '12px',
+                  color: '#000000',
+                  lineHeight: '1.4',
+                  marginBottom: '4px'
+                }}>
+                  {project.description}
+                </p>
                 {project.technologies.length > 0 && (
                   <div style={{
                     fontSize: '11px',
-                    fontStyle: 'italic',
                     color: '#000000',
                     marginBottom: '4px'
                   }}>
-                    {project.technologies.join(', ')} | 
-                    {project.link && ' Demo |'}
-                    {project.github && ' GitHub'}
+                    <strong>Technologies:</strong> {project.technologies.join(', ')}
                   </div>
                 )}
-                <ul style={{
-                  listStyleType: 'disc',
-                  paddingLeft: '20px',
-                  margin: '4px 0 0 0',
-                  color: '#000000'
-                }}>
-                  <li style={{
-                    fontSize: '11px',
-                    lineHeight: '1.4'
-                  }}>
-                    {project.description}
-                  </li>
-                </ul>
               </div>
             ))}
           </div>
@@ -371,20 +331,16 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
       {data.certifications.length > 0 && (
         <section style={{ marginBottom: '32px' }}>
           <h2 style={{
-            fontSize: '14px',
+            fontSize: '16px',
             fontWeight: 'bold',
             color: '#000000',
             marginBottom: '16px',
-            textTransform: 'uppercase',
-            letterSpacing: '1px'
+            borderBottom: '2px solid #000000',
+            paddingBottom: '4px'
           }}>
             CERTIFICATIONS
           </h2>
-          <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '24px' 
-          }}></div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {data.certifications.map((cert) => (
               <div key={cert.id}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -399,7 +355,6 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                     </h3>
                     <div style={{
                       fontSize: '11px',
-                      fontStyle: 'italic',
                       color: '#000000'
                     }}>
                       {cert.issuer}
@@ -413,15 +368,6 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                     {formatDate(cert.issueDate)}
                   </div>
                 </div>
-                {cert.credentialId && (
-                  <div style={{
-                    fontSize: '10px',
-                    color: '#000000',
-                    marginTop: '2px'
-                  }}>
-                    Credential ID: {cert.credentialId}
-                  </div>
-                )}
               </div>
             ))}
           </div>
