@@ -349,7 +349,7 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
         </section>
       )}
 
-      {/* Projects */}
+      {/* Projects - Fixed bullet point formatting */}
       {data.projects.length > 0 && (
         <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
@@ -376,16 +376,24 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                 }}>
                   {project.name}
                 </h3>
-                <p style={{
+                {/* Fixed bullet point formatting to prevent line breaks */}
+                <div style={{
                   fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
                   fontSize: '11pt',
                   color: '#000000',
                   lineHeight: '1.3',
+                  paddingLeft: '20pt',
+                  textIndent: '-20pt',
                   marginBottom: '4pt',
                   wordWrap: 'break-word'
                 }}>
-                  {project.description}
-                </p>
+                  <span style={{ 
+                    display: 'inline-block', 
+                    width: '20pt',
+                    textAlign: 'left'
+                  }}>•</span>
+                  <span style={{ display: 'inline' }}>{project.description}</span>
+                </div>
                 {project.technologies.length > 0 && (
                   <div style={{
                     fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',

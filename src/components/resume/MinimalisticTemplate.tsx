@@ -346,7 +346,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         </section>
       )}
 
-      {/* Projects Section */}
+      {/* Projects Section - Fixed bullet point formatting */}
       {data.projects.length > 0 && (
         <section style={{ marginBottom: '16pt' }}>
           <h2 style={{
@@ -395,20 +395,23 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                     2024
                   </div>
                 </div>
-                <ul style={{
-                  listStyleType: 'disc',
+                {/* Fixed bullet point formatting to prevent line breaks */}
+                <div style={{
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '10pt',
+                  lineHeight: '1.3',
+                  color: '#000000',
                   paddingLeft: '16pt',
-                  margin: '2pt 0 0 0',
-                  color: '#000000'
+                  textIndent: '-16pt',
+                  marginTop: '2pt'
                 }}>
-                  <li style={{
-                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-                    fontSize: '10pt',
-                    lineHeight: '1.3'
-                  }}>
-                    {project.description}
-                  </li>
-                </ul>
+                  <span style={{ 
+                    display: 'inline-block', 
+                    width: '16pt',
+                    textAlign: 'left'
+                  }}>•</span>
+                  <span style={{ display: 'inline' }}>{project.description}</span>
+                </div>
               </div>
             ))}
           </div>
