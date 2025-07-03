@@ -78,7 +78,7 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
       return await exportToImagePDF(elementId, filename);
     }
 
-    // Header Section - Properly spaced and formatted
+    // Header Section - Properly spaced and formatted exactly like the reference image
     
     // 1. Name (Large, bold, uppercase, centered)
     yPosition = addText(resumeData.personalInfo.fullName.toUpperCase(), 0, yPosition, {
@@ -99,14 +99,16 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
       yPosition += 2;
     }
 
-    // 3. College and graduation info with website (centered)
+    // 3. College and graduation info with website (centered) - EXACTLY like reference image
     const collegeInfo = [];
     
-    // Get college info from education data
-    const primaryEducation = resumeData.education.find(edu => edu.degree.includes('B.E') || edu.degree.includes('Bachelor')) || resumeData.education[0];
-    if (primaryEducation) {
-      collegeInfo.push(primaryEducation.institution);
-      collegeInfo.push(`${primaryEducation.endYear} Pass out`);
+    // Use college info from personal info (new fields)
+    if (resumeData.personalInfo.collegeName) {
+      collegeInfo.push(resumeData.personalInfo.collegeName);
+    }
+    
+    if (resumeData.personalInfo.graduationMonth && resumeData.personalInfo.graduationYear) {
+      collegeInfo.push(`${resumeData.personalInfo.graduationMonth} ${resumeData.personalInfo.graduationYear} Pass out`);
     }
     
     if (resumeData.personalInfo.website) {
@@ -124,15 +126,15 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
       yPosition += 2;
     }
 
-    // 4. Contact information line (centered, properly spaced)
+    // 4. Contact information line (centered, properly spaced) - EXACTLY like reference image
     const contactItems = [];
     
     if (resumeData.personalInfo.phone) {
-      contactItems.push(`Phone: ${resumeData.personalInfo.phone}`);
+      contactItems.push(resumeData.personalInfo.phone);
     }
     
     if (resumeData.personalInfo.email) {
-      contactItems.push(`Email: ${resumeData.personalInfo.email}`);
+      contactItems.push(resumeData.personalInfo.email);
     }
     
     if (resumeData.personalInfo.linkedin) {
@@ -140,41 +142,23 @@ export const exportToPDF = async (elementId: string, filename: string = 'resume.
         .replace('https://linkedin.com/in/', '')
         .replace('https://www.linkedin.com/in/', '')
         .replace('linkedin.com/in/', '');
-      contactItems.push(`LinkedIn: linkedin.com/in/${linkedinDisplay}`);
+      contactItems.push(`linkedin.com/in/${linkedinDisplay}`);
     }
     
     if (resumeData.personalInfo.github) {
       const githubDisplay = resumeData.personalInfo.github
         .replace('https://github.com/', '')
         .replace('github.com/', '');
-      contactItems.push(`GitHub: github.com/${githubDisplay}`);
+      contactItems.push(`github.com/${githubDisplay}`);
     }
 
-    // Split contact info into multiple lines if too long
+    // Format contact info exactly like the reference image
     if (contactItems.length > 0) {
-      // Check if we need to split into multiple lines
-      if (contactItems.length <= 2) {
-        // Single line for 1-2 items
-        const contactText = contactItems.join('  |  ');
-        yPosition = addText(contactText, 0, yPosition, {
-          fontSize: 10,
-          align: 'center'
-        });
-      } else {
-        // Split into two lines for better readability
-        const firstLine = contactItems.slice(0, 2).join('  |  ');
-        const secondLine = contactItems.slice(2).join('  |  ');
-        
-        yPosition = addText(firstLine, 0, yPosition, {
-          fontSize: 10,
-          align: 'center'
-        });
-        
-        yPosition = addText(secondLine, 0, yPosition, {
-          fontSize: 10,
-          align: 'center'
-        });
-      }
+      const contactText = contactItems.join('    '); // Use 4 spaces for separation like in reference
+      yPosition = addText(contactText, 0, yPosition, {
+        fontSize: 10,
+        align: 'center'
+      });
     }
 
     yPosition += 8; // Extra spacing before sections

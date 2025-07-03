@@ -3,21 +3,139 @@ import { ResumeData, ResumeTemplate } from '../types/resume';
 
 const initialResumeData: ResumeData = {
   personalInfo: {
-    fullName: '',
-    email: '',
-    phone: '',
-    location: '',
-    website: '',
-    linkedin: '',
-    github: '',
-    summary: '',
-    topSkills: ['Machine Learning Engineer', 'Data Science', 'Python Developer']
+    fullName: 'Alok Ahirrao',
+    email: 'alokahirrao.ai@gmail.com',
+    phone: '+91-9579472584',
+    location: 'Pune, Maharashtra',
+    website: 'https://alokahirrao.netlify.app',
+    linkedin: 'https://linkedin.com/in/alokahirrao',
+    github: 'https://github.com/alok-ahirrao',
+    summary: 'Passionate Machine Learning Engineer with expertise in AI-driven solutions, data science, and full-stack development. Experienced in building intelligent systems using Python, deep learning frameworks, and modern web technologies.',
+    topSkills: ['Machine Learning Engineer', 'Data Science', 'Python Developer'],
+    collegeName: 'PES Modern College of Engineering',
+    graduationMonth: 'June',
+    graduationYear: '2025'
   },
-  experience: [],
-  education: [],
-  skills: [],
-  projects: [],
-  certifications: []
+  experience: [
+    {
+      id: '1',
+      position: 'Machine Learning Developer Intern',
+      company: 'Ilytics Technology',
+      location: 'Pune',
+      startDate: '2024-06',
+      endDate: '',
+      current: true,
+      description: [
+        'Developed AI-powered smart parking system with real-time vehicle classification and slot detection',
+        'Built ML models using TensorFlow/PyTorch for vehicle classification (VIP, Normal, EV)',
+        'Enhanced chatbot interactions using prompt engineering for improved booking experience',
+        'Implemented admin dashboard for monitoring and analytics'
+      ]
+    }
+  ],
+  education: [
+    {
+      id: '1',
+      institution: 'PES Modern College of Engineering',
+      location: 'Pune',
+      degree: 'B.E.',
+      specialization: 'Artificial Intelligence and Machine Learning',
+      startYear: '2021',
+      endYear: '2025',
+      gpa: '8.17',
+      gradeType: 'cgpa'
+    },
+    {
+      id: '2',
+      institution: 'MET Bhujbal Knowledge City',
+      location: 'Nashik',
+      degree: 'Class XII',
+      specialization: 'PCM',
+      startYear: '2020',
+      endYear: '2021',
+      gpa: '81.5',
+      gradeType: 'percentage'
+    }
+  ],
+  skills: [
+    { id: '1', name: 'Python', category: 'technical' },
+    { id: '2', name: 'SQL', category: 'technical' },
+    { id: '3', name: 'Scikit-learn', category: 'technical' },
+    { id: '4', name: 'Pandas', category: 'technical' },
+    { id: '5', name: 'NumPy', category: 'technical' },
+    { id: '6', name: 'Matplotlib', category: 'technical' },
+    { id: '7', name: 'Seaborn', category: 'technical' },
+    { id: '8', name: 'OpenCV', category: 'technical' },
+    { id: '9', name: 'PyTorch', category: 'technical' },
+    { id: '10', name: 'TensorFlow', category: 'technical' },
+    { id: '11', name: 'FastAPI', category: 'technical' },
+    { id: '12', name: 'Flask', category: 'technical' },
+    { id: '13', name: 'MongoDB', category: 'technical' },
+    { id: '14', name: 'PostgreSQL', category: 'technical' },
+    { id: '15', name: 'Git', category: 'technical' },
+    { id: '16', name: 'Docker', category: 'technical' },
+    { id: '17', name: 'AWS', category: 'technical' }
+  ],
+  projects: [
+    {
+      id: '1',
+      name: 'AI Medical Bot',
+      description: 'Designed an AI-driven healthcare assistant supporting voice queries, medical image analysis, and text/audio responses using deep learning and NLP models',
+      technologies: ['Python', 'Deep Learning', 'OpenCV', 'NLP'],
+      link: 'https://demo-link.com',
+      github: 'https://github.com/alok-ahirrao/ai-medical-bot'
+    },
+    {
+      id: '2',
+      name: 'Recipe Chatbot',
+      description: 'Developed an AI-powered Recipe Chatbot using YOLO for ingredient detection and Groq API for recipe generation',
+      technologies: ['FastAPI', 'React', 'Groq API'],
+      link: '',
+      github: 'https://github.com/alok-ahirrao/recipe-chatbot'
+    },
+    {
+      id: '3',
+      name: 'Hand Gesture-Controlled Gaming System',
+      description: 'Developed interactive gaming system with hand gesture recognition using OpenCV and MediaPipe',
+      technologies: ['OpenCV', 'MediaPipe'],
+      link: '',
+      github: 'https://github.com/alok-ahirrao/gesture-gaming'
+    },
+    {
+      id: '4',
+      name: 'Number Plate Detection System',
+      description: 'Built real-time number plate recognition system using YOLOv5 and PaddleOCR',
+      technologies: ['PyTorch', 'FastAPI', 'React'],
+      link: '',
+      github: 'https://github.com/alok-ahirrao/number-plate-detection'
+    }
+  ],
+  certifications: [
+    {
+      id: '1',
+      name: 'Machine Learning Specialization',
+      issuer: 'DeepLearning.AI & Stanford University',
+      issueDate: '2023-05',
+      expiryDate: '',
+      credentialId: ''
+    },
+    {
+      id: '2',
+      name: 'NPTEL Python for Data Science',
+      issuer: 'IIT Madras - Grade A+ (79%)',
+      issueDate: '2024-01',
+      expiryDate: '',
+      credentialId: ''
+    },
+    {
+      id: '3',
+      name: 'HackerRank Problem Solving',
+      issuer: 'HackerRank',
+      issueDate: '2024-09',
+      expiryDate: '',
+      credentialId: ''
+    }
+  ]
 };
 
 export const useResumeData = () => {
@@ -34,10 +152,15 @@ export const useResumeData = () => {
         if (!parsed.personalInfo.topSkills) {
           parsed.personalInfo.topSkills = ['Machine Learning Engineer', 'Data Science', 'Python Developer'];
         }
-        // Remove old college fields if they exist
-        delete parsed.personalInfo.collegeName;
-        delete parsed.personalInfo.graduationYear;
-        delete parsed.personalInfo.graduationMonth;
+        if (!parsed.personalInfo.collegeName) {
+          parsed.personalInfo.collegeName = 'PES Modern College of Engineering';
+        }
+        if (!parsed.personalInfo.graduationMonth) {
+          parsed.personalInfo.graduationMonth = 'June';
+        }
+        if (!parsed.personalInfo.graduationYear) {
+          parsed.personalInfo.graduationYear = '2025';
+        }
         
         // Update education structure for backward compatibility
         if (parsed.education) {
@@ -56,6 +179,8 @@ export const useResumeData = () => {
         setResumeData(parsed);
       } catch (error) {
         console.error('Error loading saved resume data:', error);
+        // If there's an error, use the initial data with sample content
+        setResumeData(initialResumeData);
       }
     }
   }, []);

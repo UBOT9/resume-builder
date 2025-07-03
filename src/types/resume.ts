@@ -9,6 +9,10 @@ export interface PersonalInfo {
   summary: string;
   // New dynamic fields
   topSkills: string[];
+  // College information fields
+  collegeName?: string;
+  graduationMonth?: string;
+  graduationYear?: string;
 }
 
 export interface Experience {
