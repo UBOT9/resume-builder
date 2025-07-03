@@ -31,21 +31,21 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
       className="mx-auto bg-white" 
       id="resume-preview" 
       style={{ 
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '14px',
-        lineHeight: '1.4',
+        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+        fontSize: '11pt',
+        lineHeight: '1.2',
         color: '#000000',
-        padding: '30px',
+        padding: '40px',
         minHeight: '1123px',
         width: '100%',
         maxWidth: '850px',
         boxSizing: 'border-box'
       }}
     >
-      {/* Header - Matching the LaTeX style exactly with proper centering */}
+      {/* Header - Exact LaTeX Computer Modern styling */}
       <div style={{ 
         textAlign: 'center', 
-        marginBottom: '32px',
+        marginBottom: '24pt',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -53,50 +53,53 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
         padding: '0 20px',
         boxSizing: 'border-box'
       }}>
-        {/* Name - Large serif font, all caps, bold */}
+        {/* Name - Large serif font with LaTeX styling, all caps, bold */}
         <h1 style={{
-          fontFamily: 'Times New Roman, serif',
-          fontSize: '28px',
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '28pt',
           fontWeight: 'bold',
           color: '#000000',
-          marginBottom: '8px',
+          marginBottom: '8pt',
           textTransform: 'uppercase',
-          letterSpacing: '1px',
+          letterSpacing: '2px',
           lineHeight: '1.2',
           textAlign: 'center',
           width: '100%',
-          wordWrap: 'break-word'
+          wordWrap: 'break-word',
+          fontVariant: 'small-caps'
         }}>
-          {data.personalInfo.fullName.toUpperCase()}
+          {data.personalInfo.fullName}
         </h1>
         
-        {/* Professional title line - sans-serif with bullet separators */}
+        {/* Professional title line - serif font with bullet separators */}
         <p style={{
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '12px',
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '12pt',
           color: '#000000',
-          marginBottom: '6px',
-          lineHeight: '1.4',
+          marginBottom: '6pt',
+          lineHeight: '1.3',
           textAlign: 'center',
           width: '100%',
-          wordWrap: 'break-word'
+          wordWrap: 'break-word',
+          fontWeight: 'normal'
         }}>
           {getTopSkillsLine()}
         </p>
         
         {/* College and portfolio line - same styling as title */}
         <div style={{
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '12px',
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '12pt',
           color: '#000000',
-          marginBottom: '6px',
-          lineHeight: '1.4',
+          marginBottom: '6pt',
+          lineHeight: '1.3',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '4px',
           width: '100%',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          fontWeight: 'normal'
         }}>
           <span style={{ textAlign: 'center' }}>{getCollegeLine()}</span>
           <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
@@ -108,18 +111,19 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           </span>
         </div>
         
-        {/* Contact information line - smaller font with icons */}
+        {/* Contact information line - smaller serif font with icons */}
         <div style={{ 
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '10px', 
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '10pt', 
           color: '#000000',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '12px',
+          gap: '16px',
           flexWrap: 'wrap',
           width: '100%',
-          marginTop: '4px'
+          marginTop: '4pt',
+          fontWeight: 'normal'
         }}>
           {data.personalInfo.phone && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
@@ -152,45 +156,49 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
         </div>
       </div>
 
-      {/* Rest of the template content with classic styling */}
+      {/* Rest of the template content with classic styling using Computer Modern fonts */}
       {/* Education */}
       {data.education.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '16px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             borderBottom: '2px solid #000000',
-            paddingBottom: '4px'
+            paddingBottom: '4pt'
           }}>
             EDUCATION
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12pt' }}>
             {data.education.map((edu) => (
               <div key={edu.id}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
                   <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{
-                      fontSize: '14px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '12pt',
                       fontWeight: 'bold',
                       color: '#000000',
-                      marginBottom: '2px',
+                      marginBottom: '2pt',
                       wordWrap: 'break-word'
                     }}>
                       {edu.degree}
                     </h3>
                     <div style={{
-                      fontSize: '12px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
                       color: '#000000',
-                      marginBottom: '2px',
+                      marginBottom: '2pt',
                       wordWrap: 'break-word'
                     }}>
                       {edu.institution}, {edu.location}
                     </div>
                   </div>
                   <div style={{
-                    fontSize: '12px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '11pt',
                     fontWeight: 'bold',
                     color: '#000000',
                     flexShrink: 0
@@ -200,9 +208,10 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                 </div>
                 {(edu.gpa || edu.honors) && (
                   <div style={{
-                    fontSize: '11px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '10pt',
                     color: '#000000',
-                    marginTop: '2px',
+                    marginTop: '2pt',
                     wordWrap: 'break-word'
                   }}>
                     {edu.gpa && <span>GPA: {edu.gpa}</span>}
@@ -218,33 +227,36 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
 
       {/* Experience */}
       {data.experience.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '16px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             borderBottom: '2px solid #000000',
-            paddingBottom: '4px'
+            paddingBottom: '4pt'
           }}>
             EXPERIENCE
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16pt' }}>
             {data.experience.map((exp) => (
               <div key={exp.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px', flexWrap: 'wrap', gap: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4pt', flexWrap: 'wrap', gap: '8px' }}>
                   <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{
-                      fontSize: '14px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '12pt',
                       fontWeight: 'bold',
                       color: '#000000',
-                      marginBottom: '2px',
+                      marginBottom: '2pt',
                       wordWrap: 'break-word'
                     }}>
                       {exp.position}
                     </h3>
                     <div style={{
-                      fontSize: '12px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
                       color: '#000000',
                       wordWrap: 'break-word'
                     }}>
@@ -252,7 +264,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                     </div>
                   </div>
                   <div style={{
-                    fontSize: '12px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '11pt',
                     fontWeight: 'bold',
                     color: '#000000',
                     flexShrink: 0
@@ -262,15 +275,16 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                 </div>
                 <ul style={{
                   listStyleType: 'disc',
-                  paddingLeft: '20px',
-                  margin: '8px 0 0 0',
+                  paddingLeft: '20pt',
+                  margin: '6pt 0 0 0',
                   color: '#000000'
                 }}>
                   {exp.description.map((desc, index) => (
                     <li key={index} style={{
-                      fontSize: '12px',
-                      lineHeight: '1.4',
-                      marginBottom: '4px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
+                      lineHeight: '1.3',
+                      marginBottom: '3pt',
                       wordWrap: 'break-word'
                     }}>
                       {desc}
@@ -285,14 +299,15 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
 
       {/* Skills */}
       {data.skills.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '16px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             borderBottom: '2px solid #000000',
-            paddingBottom: '4px'
+            paddingBottom: '4pt'
           }}>
             SKILLS
           </h2>
@@ -304,19 +319,21 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                                category === 'soft' ? 'Soft Skills' : 'Languages';
             
             return (
-              <div key={category} style={{ marginBottom: '12px' }}>
+              <div key={category} style={{ marginBottom: '8pt' }}>
                 <div style={{
-                  fontSize: '12px',
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '11pt',
                   fontWeight: 'bold',
                   color: '#000000',
-                  marginBottom: '4px'
+                  marginBottom: '2pt'
                 }}>
                   {categoryName}:
                 </div>
                 <div style={{
-                  fontSize: '12px',
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '11pt',
                   color: '#000000',
-                  lineHeight: '1.4',
+                  lineHeight: '1.3',
                   wordWrap: 'break-word'
                 }}>
                   {categorySkills.map(skill => skill.name).join(', ')}
@@ -329,43 +346,47 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
 
       {/* Projects */}
       {data.projects.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '16px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             borderBottom: '2px solid #000000',
-            paddingBottom: '4px'
+            paddingBottom: '4pt'
           }}>
             PROJECTS
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16pt' }}>
             {data.projects.map((project) => (
               <div key={project.id}>
                 <h3 style={{
-                  fontSize: '14px',
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '12pt',
                   fontWeight: 'bold',
                   color: '#000000',
-                  marginBottom: '4px',
+                  marginBottom: '4pt',
                   wordWrap: 'break-word'
                 }}>
                   {project.name}
                 </h3>
                 <p style={{
-                  fontSize: '12px',
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '11pt',
                   color: '#000000',
-                  lineHeight: '1.4',
-                  marginBottom: '4px',
+                  lineHeight: '1.3',
+                  marginBottom: '4pt',
                   wordWrap: 'break-word'
                 }}>
                   {project.description}
                 </p>
                 {project.technologies.length > 0 && (
                   <div style={{
-                    fontSize: '11px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '10pt',
                     color: '#000000',
-                    marginBottom: '4px',
+                    marginBottom: '4pt',
                     wordWrap: 'break-word'
                   }}>
                     <strong>Technologies:</strong> {project.technologies.join(', ')}
@@ -379,33 +400,36 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
 
       {/* Certifications */}
       {data.certifications.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '16px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             borderBottom: '2px solid #000000',
-            paddingBottom: '4px'
+            paddingBottom: '4pt'
           }}>
             CERTIFICATIONS
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12pt' }}>
             {data.certifications.map((cert) => (
               <div key={cert.id}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
                   <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{
-                      fontSize: '12px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
                       fontWeight: 'bold',
                       color: '#000000',
-                      marginBottom: '2px',
+                      marginBottom: '2pt',
                       wordWrap: 'break-word'
                     }}>
                       {cert.name}
                     </h3>
                     <div style={{
-                      fontSize: '11px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '10pt',
                       color: '#000000',
                       wordWrap: 'break-word'
                     }}>
@@ -413,7 +437,8 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                     </div>
                   </div>
                   <div style={{
-                    fontSize: '11px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '10pt',
                     fontWeight: 'bold',
                     color: '#000000',
                     flexShrink: 0

@@ -31,9 +31,9 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
       className="mx-auto bg-white shadow-lg" 
       id="resume-preview" 
       style={{
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '14px',
-        lineHeight: '1.4',
+        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+        fontSize: '11pt',
+        lineHeight: '1.2',
         color: '#000000',
         minHeight: '1123px',
         width: '100%',
@@ -41,60 +41,63 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
         boxSizing: 'border-box'
       }}
     >
-      {/* Header - Matching the LaTeX style exactly with proper centering */}
+      {/* Header - Exact LaTeX Computer Modern styling */}
       <div style={{ 
         textAlign: 'center', 
-        padding: '30px 30px 20px 30px',
+        padding: '40px 40px 24pt 40px',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         boxSizing: 'border-box'
       }}>
-        {/* Name - Large serif font, all caps, bold */}
+        {/* Name - Large serif font with LaTeX styling, all caps, bold */}
         <h1 style={{
-          fontFamily: 'Times New Roman, serif',
-          fontSize: '28px',
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '28pt',
           fontWeight: 'bold',
           color: '#000000',
-          marginBottom: '8px',
+          marginBottom: '8pt',
           textTransform: 'uppercase',
-          letterSpacing: '1px',
+          letterSpacing: '2px',
           lineHeight: '1.2',
           textAlign: 'center',
           width: '100%',
-          wordWrap: 'break-word'
+          wordWrap: 'break-word',
+          fontVariant: 'small-caps'
         }}>
-          {data.personalInfo.fullName.toUpperCase()}
+          {data.personalInfo.fullName}
         </h1>
         
-        {/* Professional title line - sans-serif with bullet separators */}
+        {/* Professional title line - serif font with bullet separators */}
         <p style={{
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '12px',
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '12pt',
           color: '#000000',
-          marginBottom: '6px',
-          lineHeight: '1.4',
+          marginBottom: '6pt',
+          lineHeight: '1.3',
           textAlign: 'center',
           width: '100%',
-          wordWrap: 'break-word'
+          wordWrap: 'break-word',
+          fontWeight: 'normal'
         }}>
           {getTopSkillsLine()}
         </p>
         
         {/* College and portfolio line - same styling as title */}
         <div style={{
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '12px',
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '12pt',
           color: '#000000',
-          marginBottom: '6px',
-          lineHeight: '1.4',
+          marginBottom: '6pt',
+          lineHeight: '1.3',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '4px',
           width: '100%',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          fontWeight: 'normal'
         }}>
           <span style={{ textAlign: 'center' }}>{getCollegeLine()}</span>
           <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
@@ -106,18 +109,19 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           </span>
         </div>
         
-        {/* Contact information line - smaller font with icons */}
+        {/* Contact information line - smaller serif font with icons */}
         <div style={{ 
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '10px', 
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '10pt', 
           color: '#000000',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '12px',
+          gap: '16px',
           flexWrap: 'wrap',
           width: '100%',
-          marginTop: '4px'
+          marginTop: '4pt',
+          fontWeight: 'normal'
         }}>
           {data.personalInfo.phone && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
@@ -150,14 +154,22 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
         </div>
       </div>
 
-      <div style={{ padding: '0 30px 30px 30px', boxSizing: 'border-box' }}>
+      <div style={{ padding: '0 40px 40px 40px', boxSizing: 'border-box' }}>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Experience */}
             {data.experience.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-blue-600">
+                <h2 style={{
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '14pt',
+                  fontWeight: 'bold',
+                  color: '#000000',
+                  marginBottom: '8pt',
+                  paddingBottom: '4pt',
+                  borderBottom: '2px solid #2563eb'
+                }}>
                   Experience
                 </h2>
                 <div className="space-y-6">
@@ -165,14 +177,38 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                     <div key={exp.id}>
                       <div className="flex justify-between items-start mb-2 flex-wrap gap-2">
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-semibold text-gray-800 break-words">{exp.position}</h3>
-                          <p className="text-blue-600 font-medium break-words">{exp.company}</p>
-                          <p className="text-gray-600 text-sm break-words">{exp.location}</p>
+                          <h3 style={{
+                            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                            fontSize: '12pt',
+                            fontWeight: 'bold',
+                            color: '#000000',
+                            marginBottom: '2pt'
+                          }}>
+                            {exp.position}
+                          </h3>
+                          <p style={{
+                            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                            fontSize: '11pt',
+                            color: '#2563eb',
+                            fontWeight: '500'
+                          }}>
+                            {exp.company}
+                          </p>
+                          <p style={{
+                            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                            fontSize: '10pt',
+                            color: '#666666'
+                          }}>
+                            {exp.location}
+                          </p>
                         </div>
                         <div className="text-right text-sm text-gray-600 flex-shrink-0">
                           <div className="flex items-center space-x-1">
                             <Calendar className="h-4 w-4" />
-                            <span>
+                            <span style={{
+                              fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                              fontSize: '10pt'
+                            }}>
                               {formatDate(exp.startDate)} - {exp.current ? 'Present' : formatDate(exp.endDate)}
                             </span>
                           </div>
@@ -180,7 +216,14 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                       </div>
                       <ul className="list-disc list-inside text-gray-700 space-y-1">
                         {exp.description.map((desc, index) => (
-                          <li key={index} className="break-words">{desc}</li>
+                          <li key={index} style={{
+                            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                            fontSize: '11pt',
+                            lineHeight: '1.3',
+                            color: '#000000'
+                          }}>
+                            {desc}
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -192,30 +235,74 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
             {/* Projects */}
             {data.projects.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-blue-600">
+                <h2 style={{
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '14pt',
+                  fontWeight: 'bold',
+                  color: '#000000',
+                  marginBottom: '8pt',
+                  paddingBottom: '4pt',
+                  borderBottom: '2px solid #2563eb'
+                }}>
                   Projects
                 </h2>
                 <div className="space-y-4">
                   {data.projects.map((project) => (
                     <div key={project.id}>
                       <div className="flex justify-between items-start mb-2 flex-wrap gap-2">
-                        <h3 className="text-lg font-semibold text-gray-800 flex-1 min-w-0 break-words">{project.name}</h3>
+                        <h3 style={{
+                          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                          fontSize: '12pt',
+                          fontWeight: 'bold',
+                          color: '#000000',
+                          flex: '1',
+                          minWidth: '0'
+                        }}>
+                          {project.name}
+                        </h3>
                         <div className="flex space-x-2 flex-shrink-0">
                           {project.link && (
-                            <span className="text-blue-600 text-sm">Demo</span>
+                            <span style={{
+                              fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                              fontSize: '10pt',
+                              color: '#2563eb'
+                            }}>
+                              Demo
+                            </span>
                           )}
                           {project.github && (
-                            <span className="text-gray-600 text-sm">Code</span>
+                            <span style={{
+                              fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                              fontSize: '10pt',
+                              color: '#666666'
+                            }}>
+                              Code
+                            </span>
                           )}
                         </div>
                       </div>
-                      <p className="text-gray-700 mb-2 break-words">{project.description}</p>
+                      <p style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '11pt',
+                        color: '#000000',
+                        lineHeight: '1.3',
+                        marginBottom: '8px'
+                      }}>
+                        {project.description}
+                      </p>
                       {project.technologies.length > 0 && (
                         <div className="flex flex-wrap gap-2">
                           {project.technologies.map((tech, index) => (
                             <span
                               key={index}
-                              className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full break-words"
+                              style={{
+                                fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                                fontSize: '9pt',
+                                padding: '2px 8px',
+                                backgroundColor: '#dbeafe',
+                                color: '#1e40af',
+                                borderRadius: '12px'
+                              }}
                             >
                               {tech}
                             </span>
@@ -234,21 +321,67 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
             {/* Education */}
             {data.education.length > 0 && (
               <section>
-                <h2 className="text-xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-blue-600">
+                <h2 style={{
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '14pt',
+                  fontWeight: 'bold',
+                  color: '#000000',
+                  marginBottom: '8pt',
+                  paddingBottom: '4pt',
+                  borderBottom: '2px solid #2563eb'
+                }}>
                   Education
                 </h2>
                 <div className="space-y-4">
                   {data.education.map((edu) => (
                     <div key={edu.id}>
-                      <h3 className="font-semibold text-gray-800 break-words">{edu.degree}</h3>
-                      <p className="text-blue-600 font-medium break-words">{edu.institution}</p>
-                      <p className="text-gray-600 text-sm break-words">{edu.location}</p>
-                      <p className="text-gray-600 text-sm">{formatDate(edu.graduationDate)}</p>
+                      <h3 style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '12pt',
+                        fontWeight: 'bold',
+                        color: '#000000'
+                      }}>
+                        {edu.degree}
+                      </h3>
+                      <p style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '11pt',
+                        color: '#2563eb',
+                        fontWeight: '500'
+                      }}>
+                        {edu.institution}
+                      </p>
+                      <p style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '10pt',
+                        color: '#666666'
+                      }}>
+                        {edu.location}
+                      </p>
+                      <p style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '10pt',
+                        color: '#666666'
+                      }}>
+                        {formatDate(edu.graduationDate)}
+                      </p>
                       {edu.gpa && (
-                        <p className="text-gray-600 text-sm">GPA: {edu.gpa}</p>
+                        <p style={{
+                          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                          fontSize: '10pt',
+                          color: '#666666'
+                        }}>
+                          GPA: {edu.gpa}
+                        </p>
                       )}
                       {edu.honors && (
-                        <p className="text-gray-600 text-sm break-words">{edu.honors}</p>
+                        <p style={{
+                          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                          fontSize: '10pt',
+                          color: '#666666'
+                        }}>
+                          {edu.honors}
+                        </p>
                       )}
                     </div>
                   ))}
@@ -259,7 +392,15 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
             {/* Skills */}
             {data.skills.length > 0 && (
               <section>
-                <h2 className="text-xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-blue-600">
+                <h2 style={{
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '14pt',
+                  fontWeight: 'bold',
+                  color: '#000000',
+                  marginBottom: '8pt',
+                  paddingBottom: '4pt',
+                  borderBottom: '2px solid #2563eb'
+                }}>
                   Skills
                 </h2>
                 
@@ -272,10 +413,22 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                   
                   return (
                     <div key={category} className="mb-4">
-                      <h3 className="font-semibold text-gray-800 mb-2">{categoryName}</h3>
+                      <h3 style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '12pt',
+                        fontWeight: 'bold',
+                        color: '#000000',
+                        marginBottom: '8px'
+                      }}>
+                        {categoryName}
+                      </h3>
                       <div className="space-y-2">
                         {categorySkills.map((skill) => (
-                          <div key={skill.id} className="text-gray-700 text-sm break-words">
+                          <div key={skill.id} style={{
+                            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                            fontSize: '11pt',
+                            color: '#000000'
+                          }}>
                             {skill.name}
                           </div>
                         ))}
@@ -289,17 +442,51 @@ export const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
             {/* Certifications */}
             {data.certifications.length > 0 && (
               <section>
-                <h2 className="text-xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-blue-600">
+                <h2 style={{
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '14pt',
+                  fontWeight: 'bold',
+                  color: '#000000',
+                  marginBottom: '8pt',
+                  paddingBottom: '4pt',
+                  borderBottom: '2px solid #2563eb'
+                }}>
                   Certifications
                 </h2>
                 <div className="space-y-4">
                   {data.certifications.map((cert) => (
                     <div key={cert.id}>
-                      <h3 className="font-semibold text-gray-800 break-words">{cert.name}</h3>
-                      <p className="text-blue-600 font-medium break-words">{cert.issuer}</p>
-                      <p className="text-gray-600 text-sm">{formatDate(cert.issueDate)}</p>
+                      <h3 style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '12pt',
+                        fontWeight: 'bold',
+                        color: '#000000'
+                      }}>
+                        {cert.name}
+                      </h3>
+                      <p style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '11pt',
+                        color: '#2563eb',
+                        fontWeight: '500'
+                      }}>
+                        {cert.issuer}
+                      </p>
+                      <p style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '10pt',
+                        color: '#666666'
+                      }}>
+                        {formatDate(cert.issueDate)}
+                      </p>
                       {cert.credentialId && (
-                        <p className="text-gray-600 text-sm break-words">ID: {cert.credentialId}</p>
+                        <p style={{
+                          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                          fontSize: '10pt',
+                          color: '#666666'
+                        }}>
+                          ID: {cert.credentialId}
+                        </p>
                       )}
                     </div>
                   ))}

@@ -31,71 +31,74 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
       className="mx-auto bg-white" 
       id="resume-preview" 
       style={{ 
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '14px',
-        lineHeight: '1.4',
+        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+        fontSize: '11pt',
+        lineHeight: '1.2',
         color: '#000000',
-        padding: '30px',
+        padding: '40px',
         minHeight: '1123px',
         width: '100%',
         maxWidth: '850px',
         boxSizing: 'border-box'
       }}
     >
-      {/* Header - Matching the LaTeX style exactly with proper centering */}
+      {/* Header - Exact LaTeX Computer Modern styling */}
       <div style={{ 
         textAlign: 'center', 
-        marginBottom: '32px',
+        marginBottom: '24pt',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '0 20px'
+        padding: '0'
       }}>
-        {/* Name - Large serif font, all caps, bold */}
+        {/* Name - Large serif font with LaTeX styling, all caps, bold */}
         <h1 style={{
-          fontFamily: 'Times New Roman, serif',
-          fontSize: '28px',
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '28pt',
           fontWeight: 'bold',
           color: '#000000',
-          marginBottom: '8px',
+          marginBottom: '8pt',
           textTransform: 'uppercase',
-          letterSpacing: '1px',
+          letterSpacing: '2px',
           lineHeight: '1.2',
           textAlign: 'center',
           width: '100%',
-          wordWrap: 'break-word'
+          wordWrap: 'break-word',
+          fontVariant: 'small-caps'
         }}>
-          {data.personalInfo.fullName.toUpperCase()}
+          {data.personalInfo.fullName}
         </h1>
         
-        {/* Professional title line - sans-serif with bullet separators */}
+        {/* Professional title line - serif font with bullet separators */}
         <p style={{
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '12px',
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '12pt',
           color: '#000000',
-          marginBottom: '6px',
-          lineHeight: '1.4',
+          marginBottom: '6pt',
+          lineHeight: '1.3',
           textAlign: 'center',
           width: '100%',
-          wordWrap: 'break-word'
+          wordWrap: 'break-word',
+          fontWeight: 'normal'
         }}>
           {getTopSkillsLine()}
         </p>
         
         {/* College and portfolio line - same styling as title */}
         <div style={{
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '12px',
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '12pt',
           color: '#000000',
-          marginBottom: '6px',
-          lineHeight: '1.4',
+          marginBottom: '6pt',
+          lineHeight: '1.3',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '4px',
           width: '100%',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          fontWeight: 'normal'
         }}>
           <span style={{ textAlign: 'center' }}>{getCollegeLine()}</span>
           <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
@@ -107,18 +110,19 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
           </span>
         </div>
         
-        {/* Contact information line - smaller font with icons */}
+        {/* Contact information line - smaller serif font with icons */}
         <div style={{ 
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '10px', 
+          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+          fontSize: '10pt', 
           color: '#000000',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '12px',
+          gap: '16px',
           flexWrap: 'wrap',
           width: '100%',
-          marginTop: '4px'
+          marginTop: '4pt',
+          fontWeight: 'normal'
         }}>
           {data.personalInfo.phone && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
@@ -153,58 +157,63 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
 
       {/* Education Section */}
       {data.education.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '14px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             textTransform: 'uppercase',
             letterSpacing: '1px'
           }}>
-            EDUCATION
+            Education
           </h2>
           <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '16px' 
+            borderBottom: '0.4pt solid #000000', 
+            marginBottom: '12pt' 
           }}></div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12pt' }}>
             {data.education.map((edu) => (
               <div key={edu.id}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
                   <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{
-                      fontSize: '12px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '12pt',
                       fontWeight: 'bold',
                       color: '#000000',
-                      marginBottom: '2px'
+                      marginBottom: '2pt'
                     }}>
                       {edu.institution}
                     </h3>
                     <div style={{
-                      fontSize: '11px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
                       fontStyle: 'italic',
                       color: '#000000',
-                      marginBottom: '2px'
+                      marginBottom: '2pt'
                     }}>
                       {edu.degree}
                     </div>
                   </div>
                   <div style={{
-                    fontSize: '11px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '11pt',
                     fontWeight: 'bold',
                     color: '#000000',
                     textAlign: 'right',
                     flexShrink: 0
                   }}>
-                    {formatDate(edu.graduationDate)}
+                    {edu.graduationDate.split('-')[0]} – {parseInt(edu.graduationDate.split('-')[0]) + (edu.degree.includes('B.E.') ? 4 : 1)}
                   </div>
                 </div>
                 {edu.gpa && (
                   <div style={{
-                    fontSize: '11px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '11pt',
                     color: '#000000',
-                    marginTop: '2px'
+                    marginTop: '2pt'
                   }}>
                     CGPA: {edu.gpa}
                   </div>
@@ -217,47 +226,59 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
 
       {/* Technical Skills */}
       {data.skills.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '14px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             textTransform: 'uppercase',
             letterSpacing: '1px'
           }}>
-            TECHNICAL SKILLS
+            Technical Skills
           </h2>
           <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '16px' 
+            borderBottom: '0.4pt solid #000000', 
+            marginBottom: '12pt' 
           }}></div>
           
-          {/* Group skills by category */}
-          {['technical', 'soft', 'language'].map((category) => {
-            const categorySkills = data.skills.filter(skill => skill.category === category);
-            if (categorySkills.length === 0) return null;
+          {/* Group skills by category with LaTeX-style formatting */}
+          {[
+            { category: 'technical', label: 'Programming Languages' },
+            { category: 'technical', label: 'Machine Learning & Data Science' },
+            { category: 'technical', label: 'Deep Learning' },
+            { category: 'technical', label: 'Backend & APIs' },
+            { category: 'technical', label: 'Tools & Platforms' },
+            { category: 'technical', label: 'Deployment & DevOps' }
+          ].map((skillGroup, index) => {
+            // For demo purposes, distribute skills across categories
+            const allTechnicalSkills = data.skills.filter(skill => skill.category === 'technical');
+            const skillsPerGroup = Math.ceil(allTechnicalSkills.length / 6);
+            const groupSkills = allTechnicalSkills.slice(index * skillsPerGroup, (index + 1) * skillsPerGroup);
             
-            const categoryName = category === 'technical' ? 'Programming Languages' : 
-                               category === 'soft' ? 'Soft Skills' : 'Languages';
+            if (groupSkills.length === 0) return null;
             
             return (
-              <div key={category} style={{ marginBottom: '12px' }}>
+              <div key={index} style={{ marginBottom: '8pt' }}>
                 <div style={{
-                  fontSize: '11px',
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '11pt',
                   fontWeight: 'bold',
                   color: '#000000',
-                  marginBottom: '4px'
+                  marginBottom: '2pt'
                 }}>
-                  {categoryName}:
+                  {skillGroup.label}:
                 </div>
                 <div style={{
-                  fontSize: '11px',
+                  fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                  fontSize: '11pt',
                   color: '#000000',
-                  lineHeight: '1.4',
-                  wordWrap: 'break-word'
+                  lineHeight: '1.3',
+                  wordWrap: 'break-word',
+                  marginLeft: '12pt'
                 }}>
-                  {categorySkills.map(skill => skill.name).join(', ')}
+                  {groupSkills.map(skill => skill.name).join(', ')}
                 </div>
               </div>
             );
@@ -267,36 +288,39 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
 
       {/* Work Experience */}
       {data.experience.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '14px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             textTransform: 'uppercase',
             letterSpacing: '1px'
           }}>
-            WORK EXPERIENCE
+            Work Experience
           </h2>
           <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '24px' 
+            borderBottom: '0.4pt solid #000000', 
+            marginBottom: '12pt' 
           }}></div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16pt' }}>
             {data.experience.map((exp) => (
               <div key={exp.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px', flexWrap: 'wrap', gap: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4pt', flexWrap: 'wrap', gap: '8px' }}>
                   <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{
-                      fontSize: '12px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '12pt',
                       fontWeight: 'bold',
                       color: '#000000',
-                      marginBottom: '2px'
+                      marginBottom: '2pt'
                     }}>
                       {exp.company}
                     </h3>
                     <div style={{
-                      fontSize: '11px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
                       fontStyle: 'italic',
                       color: '#000000'
                     }}>
@@ -304,15 +328,16 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                     </div>
                   </div>
                   <div style={{
-                    fontSize: '11px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '11pt',
                     fontWeight: 'bold',
                     color: '#000000',
                     textAlign: 'right',
                     flexShrink: 0
                   }}>
-                    {formatDate(exp.startDate)} - {exp.current ? 'Present' : formatDate(exp.endDate)}
+                    {formatDate(exp.startDate)} – {exp.current ? 'Present' : formatDate(exp.endDate)}
                     {exp.location && (
-                      <div style={{ fontSize: '10px', fontWeight: 'normal', fontStyle: 'italic' }}>
+                      <div style={{ fontSize: '10pt', fontWeight: 'normal', fontStyle: 'italic' }}>
                         {exp.location}
                       </div>
                     )}
@@ -320,15 +345,16 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                 </div>
                 <ul style={{
                   listStyleType: 'disc',
-                  paddingLeft: '20px',
-                  margin: '8px 0 0 0',
+                  paddingLeft: '20pt',
+                  margin: '6pt 0 0 0',
                   color: '#000000'
                 }}>
                   {exp.description.map((desc, index) => (
                     <li key={index} style={{
-                      fontSize: '11px',
-                      lineHeight: '1.4',
-                      marginBottom: '4px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
+                      lineHeight: '1.3',
+                      marginBottom: '3pt',
                       wordWrap: 'break-word'
                     }}>
                       {desc}
@@ -343,27 +369,29 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
 
       {/* Projects */}
       {data.projects.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '14px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             textTransform: 'uppercase',
             letterSpacing: '1px'
           }}>
-            PROJECTS
+            Projects
           </h2>
           <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '24px' 
+            borderBottom: '0.4pt solid #000000', 
+            marginBottom: '12pt' 
           }}></div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16pt' }}>
             {data.projects.map((project) => (
               <div key={project.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px', flexWrap: 'wrap', gap: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4pt', flexWrap: 'wrap', gap: '8px' }}>
                   <h3 style={{
-                    fontSize: '12px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '12pt',
                     fontWeight: 'bold',
                     color: '#000000',
                     flex: '1',
@@ -372,7 +400,8 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                     {project.name}
                   </h3>
                   <div style={{
-                    fontSize: '11px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '11pt',
                     fontWeight: 'bold',
                     color: '#000000',
                     flexShrink: 0
@@ -382,26 +411,28 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                 </div>
                 {project.technologies.length > 0 && (
                   <div style={{
-                    fontSize: '11px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '11pt',
                     fontStyle: 'italic',
                     color: '#000000',
-                    marginBottom: '4px',
+                    marginBottom: '4pt',
                     wordWrap: 'break-word'
                   }}>
-                    {project.technologies.join(', ')} | 
-                    {project.link && ' Demo |'}
-                    {project.github && ' GitHub'}
+                    {project.technologies.join(', ')}
+                    {project.link && ' | Demo'}
+                    {project.github && ' | GitHub'}
                   </div>
                 )}
                 <ul style={{
                   listStyleType: 'disc',
-                  paddingLeft: '20px',
-                  margin: '4px 0 0 0',
+                  paddingLeft: '20pt',
+                  margin: '4pt 0 0 0',
                   color: '#000000'
                 }}>
                   <li style={{
-                    fontSize: '11px',
-                    lineHeight: '1.4',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '11pt',
+                    lineHeight: '1.3',
                     wordWrap: 'break-word'
                   }}>
                     {project.description}
@@ -415,36 +446,39 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
 
       {/* Certifications */}
       {data.certifications.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
+        <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
-            fontSize: '14px',
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
             fontWeight: 'bold',
             color: '#000000',
-            marginBottom: '16px',
+            marginBottom: '8pt',
             textTransform: 'uppercase',
             letterSpacing: '1px'
           }}>
-            CERTIFICATIONS
+            Certifications
           </h2>
           <div style={{ 
-            borderBottom: '0.4px solid #000000', 
-            marginBottom: '24px' 
+            borderBottom: '0.4pt solid #000000', 
+            marginBottom: '12pt' 
           }}></div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12pt' }}>
             {data.certifications.map((cert) => (
               <div key={cert.id}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
                   <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{
-                      fontSize: '12px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '12pt',
                       fontWeight: 'bold',
                       color: '#000000',
-                      marginBottom: '2px'
+                      marginBottom: '2pt'
                     }}>
                       {cert.name}
                     </h3>
                     <div style={{
-                      fontSize: '11px',
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
                       fontStyle: 'italic',
                       color: '#000000'
                     }}>
@@ -452,7 +486,8 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                     </div>
                   </div>
                   <div style={{
-                    fontSize: '11px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '11pt',
                     fontWeight: 'bold',
                     color: '#000000',
                     flexShrink: 0
@@ -462,9 +497,10 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                 </div>
                 {cert.credentialId && (
                   <div style={{
-                    fontSize: '10px',
+                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                    fontSize: '10pt',
                     color: '#000000',
-                    marginTop: '2px',
+                    marginTop: '2pt',
                     wordWrap: 'break-word'
                   }}>
                     Credential ID: {cert.credentialId}
