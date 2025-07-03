@@ -13,21 +13,10 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   };
 
-  // Generate dynamic header content exactly like reference image
+  // Generate dynamic header content
   const getTopSkillsLine = () => {
     const skills = data.personalInfo.topSkills || ['Machine Learning Engineer', 'Data Science', 'Python Developer'];
     return skills.filter(skill => skill.trim()).join(' • ');
-  };
-
-  const getCollegeLine = () => {
-    const collegeName = data.personalInfo.collegeName || 'PES Modern College of Engineering';
-    const graduationMonth = data.personalInfo.graduationMonth || 'June';
-    const graduationYear = data.personalInfo.graduationYear || '2025';
-    const website = data.personalInfo.website ? 
-      data.personalInfo.website.replace('https://', '').replace('http://', '') : 
-      'alokahirrao.netlify.app';
-    
-    return `${collegeName} • ${graduationMonth} ${graduationYear} Pass out • ${website}`;
   };
 
   return (
@@ -90,26 +79,28 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           {getTopSkillsLine()}
         </p>
         
-        {/* College and portfolio line - EXACTLY like reference image */}
-        <div style={{
-          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-          fontSize: '12pt',
-          color: '#000000',
-          marginBottom: '6pt',
-          lineHeight: '1.3',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '4px',
-          width: '100%',
-          flexWrap: 'wrap',
-          fontWeight: 'normal'
-        }}>
-          <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
-          <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>
-            {getCollegeLine()}
-          </span>
-        </div>
+        {/* Website line */}
+        {data.personalInfo.website && (
+          <div style={{
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '12pt',
+            color: '#000000',
+            marginBottom: '6pt',
+            lineHeight: '1.3',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '4px',
+            width: '100%',
+            flexWrap: 'wrap',
+            fontWeight: 'normal'
+          }}>
+            <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
+            <span style={{ textDecoration: 'underline', wordBreak: 'break-all' }}>
+              {data.personalInfo.website.replace('https://', '').replace('http://', '')}
+            </span>
+          </div>
+        )}
         
         {/* Contact information line - smaller serif font with icons */}
         <div style={{ 
@@ -155,6 +146,32 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
           )}
         </div>
       </div>
+
+      {/* Professional Summary Section - Optional */}
+      {data.personalInfo.summary && (
+        <section style={{ marginBottom: '18pt' }}>
+          <h2 style={{
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '14pt',
+            fontWeight: 'bold',
+            color: '#000000',
+            marginBottom: '8pt',
+            borderBottom: '2px solid #000000',
+            paddingBottom: '4pt'
+          }}>
+            PROFESSIONAL SUMMARY
+          </h2>
+          <p style={{
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '11pt',
+            color: '#000000',
+            lineHeight: '1.4',
+            textAlign: 'justify'
+          }}>
+            {data.personalInfo.summary}
+          </p>
+        </section>
+      )}
 
       {/* Education Section with marks below year */}
       {data.education.length > 0 && (

@@ -30,21 +30,10 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
     return `${startYear}`;
   };
 
-  // Generate dynamic header content exactly like reference image
+  // Generate dynamic header content
   const getTopSkillsLine = () => {
     const skills = data.personalInfo.topSkills || ['Machine Learning Engineer', 'Data Science', 'Python Developer'];
     return skills.filter(skill => skill.trim()).join(' • ');
-  };
-
-  const getCollegeLine = () => {
-    const collegeName = data.personalInfo.collegeName || 'PES Modern College of Engineering';
-    const graduationMonth = data.personalInfo.graduationMonth || 'June';
-    const graduationYear = data.personalInfo.graduationYear || '2025';
-    const website = data.personalInfo.website ? 
-      data.personalInfo.website.replace('https://', '').replace('http://', '') : 
-      'alokahirrao.netlify.app';
-    
-    return `${collegeName} • ${graduationMonth} ${graduationYear} Pass out • ${website}`;
   };
 
   return (
@@ -98,25 +87,27 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
           {getTopSkillsLine()}
         </p>
         
-        {/* College and website line - EXACTLY like reference image */}
-        <div style={{
-          fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-          fontSize: '12pt',
-          color: '#000000',
-          marginBottom: '6pt',
-          lineHeight: '1.2',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '4px',
-          flexWrap: 'wrap',
-          fontWeight: 'normal'
-        }}>
-          <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
-          <span style={{ textDecoration: 'underline' }}>
-            {getCollegeLine()}
-          </span>
-        </div>
+        {/* Website line */}
+        {data.personalInfo.website && (
+          <div style={{
+            fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+            fontSize: '12pt',
+            color: '#000000',
+            marginBottom: '6pt',
+            lineHeight: '1.2',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '4px',
+            flexWrap: 'wrap',
+            fontWeight: 'normal'
+          }}>
+            <Globe style={{ width: '12px', height: '12px', flexShrink: 0 }} />
+            <span style={{ textDecoration: 'underline' }}>
+              {data.personalInfo.website.replace('https://', '').replace('http://', '')}
+            </span>
+          </div>
+        )}
         
         {/* Contact information line */}
         <div style={{ 
