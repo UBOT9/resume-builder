@@ -154,7 +154,7 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
         </div>
       </div>
 
-      {/* Education Section - Matching exact layout from reference */}
+      {/* Education Section - Matching exact layout from reference with marks below year */}
       {data.education.length > 0 && (
         <section style={{ marginBottom: '16pt' }}>
           <h2 style={{
@@ -190,25 +190,32 @@ export const MinimalisticTemplate: React.FC<MinimalisticTemplateProps> = ({ data
                     }}>
                       {edu.degree}{edu.specialization && `, ${edu.specialization}`}
                     </div>
+                  </div>
+                  <div style={{
+                    textAlign: 'right',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-end'
+                  }}>
+                    <div style={{
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
+                      fontWeight: 'bold',
+                      color: '#000000',
+                      marginBottom: '1pt'
+                    }}>
+                      {edu.startYear} – {edu.endYear}
+                    </div>
                     {edu.gpa && (
                       <div style={{
                         fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
                         fontSize: '10pt',
-                        color: '#000000',
-                        marginTop: '1pt'
+                        fontStyle: 'italic',
+                        color: '#000000'
                       }}>
                         {edu.gradeType === 'percentage' ? 'Percentage' : 'CGPA'}: {edu.gpa}
                       </div>
                     )}
-                  </div>
-                  <div style={{
-                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-                    fontSize: '11pt',
-                    fontWeight: 'bold',
-                    color: '#000000',
-                    textAlign: 'right'
-                  }}>
-                    {edu.startYear} – {edu.endYear}
                   </div>
                 </div>
               </div>

@@ -156,8 +156,7 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
         </div>
       </div>
 
-      {/* Rest of the template content with classic styling using Computer Modern fonts */}
-      {/* Education */}
+      {/* Education Section with marks below year */}
       {data.education.length > 0 && (
         <section style={{ marginBottom: '18pt' }}>
           <h2 style={{
@@ -184,41 +183,47 @@ export const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
                       marginBottom: '2pt',
                       wordWrap: 'break-word'
                     }}>
-                      {edu.degree}
+                      {edu.institution}{edu.location && `, ${edu.location}`}
                     </h3>
                     <div style={{
                       fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
                       fontSize: '11pt',
+                      fontStyle: 'italic',
                       color: '#000000',
                       marginBottom: '2pt',
                       wordWrap: 'break-word'
                     }}>
-                      {edu.institution}, {edu.location}
+                      {edu.degree}{edu.specialization && `, ${edu.specialization}`}
                     </div>
                   </div>
                   <div style={{
-                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-                    fontSize: '11pt',
-                    fontWeight: 'bold',
-                    color: '#000000',
+                    textAlign: 'right',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-end',
                     flexShrink: 0
                   }}>
-                    {formatDate(edu.graduationDate)}
+                    <div style={{
+                      fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                      fontSize: '11pt',
+                      fontWeight: 'bold',
+                      color: '#000000',
+                      marginBottom: '1pt'
+                    }}>
+                      {edu.startYear} – {edu.endYear}
+                    </div>
+                    {edu.gpa && (
+                      <div style={{
+                        fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
+                        fontSize: '10pt',
+                        fontStyle: 'italic',
+                        color: '#000000'
+                      }}>
+                        {edu.gradeType === 'percentage' ? 'Percentage' : 'CGPA'}: {edu.gpa}
+                      </div>
+                    )}
                   </div>
                 </div>
-                {(edu.gpa || edu.honors) && (
-                  <div style={{
-                    fontFamily: '"Computer Modern Serif", "Latin Modern Roman", "Times New Roman", "Times", serif',
-                    fontSize: '10pt',
-                    color: '#000000',
-                    marginTop: '2pt',
-                    wordWrap: 'break-word'
-                  }}>
-                    {edu.gpa && <span>GPA: {edu.gpa}</span>}
-                    {edu.gpa && edu.honors && <span> • </span>}
-                    {edu.honors && <span>{edu.honors}</span>}
-                  </div>
-                )}
               </div>
             ))}
           </div>
